@@ -1,15 +1,29 @@
 package com.datastructureexercises.test;
 
 
-import org.springframework.util.Assert;
+import net.sf.json.JSONArray;
+import net.sf.json.JsonConfig;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 public class Test2 {
     public static void main(String[] args) {
+        Hobby hobby_1 = new Hobby();
+        hobby_1.setHobbyId(1);
+        hobby_1.setHobbyName("跑步");
+        Set<Hobby> hobbies = new HashSet<>();
+        hobbies.add(hobby_1);
+        Nurse nurse_1 = new Nurse();
+        nurse_1.setId(1);
+        nurse_1.setName("西西");
+        nurse_1.setAge(18);
+        nurse_1.setContent("haha");
+        nurse_1.setHobbies(hobbies);
+        HashSet<Nurse> nurses = new HashSet<>();
+        nurses.add(nurse_1);
+        hobby_1.setNurses(nurses);
 
     }
 

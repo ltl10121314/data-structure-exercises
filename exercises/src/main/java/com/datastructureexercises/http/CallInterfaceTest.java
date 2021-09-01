@@ -243,5 +243,28 @@ public class CallInterfaceTest {
         }
     }
 
-
+    public static void main(String[] args) throws Exception {
+        String address = "https://172.16.26.78/dpsjy/rest/WorkflowServiceForRest/bdiEtlMonitorWfDefNew";
+        String json = "{\n" +
+                "  \"objectInfo\": {\n" +
+                "    \"key\": \"\",\n" +
+                "    \"startType\": \"\",\n" +
+                "    \"versionType\": 0,\n" +
+                "    \"hasCheckIn\": \"\",\n" +
+                "    \"objType\": \"m35\",\n" +
+                "    \"wfName\": \"\",\n" +
+                "    \"wfCode\": \"\",\n" +
+                "    \"oid\": \"\",\n" +
+                "    \"treeNode\": \"\",\n" +
+                "    \"treeLevel\": 1,\n" +
+                "    \"sort\": \"lastSaveTime\",\n" +
+                "    \"dir\": \"desc\",\n" +
+                "    \"limit\": 20,\n" +
+                "    \"start\": 0\n" +
+                "  },\n" +
+                "  \"token\":101010\n" +
+                "}";
+        String result = sendPost(address, json);
+        System.out.println(result);
+    }
 }
