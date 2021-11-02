@@ -1,6 +1,10 @@
 package com.datastructureexercises.sql;
 
 import org.junit.Test;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import javax.sql.DataSource;
+import java.sql.SQLException;
 
 public class SqlFormatTest {
     @Test
@@ -14,4 +18,17 @@ public class SqlFormatTest {
                 " and eel.delete_flag = 0) event group by current_id, name";
         SqlFormat.sqlFormat(sql);
     }
+    /**
+     * 使用属性文件的方式来连接数据库
+     * 注意点:在配置user的时候不要使用username,在spring中username有特殊的含义,配置的时候
+     * 会发现数据库连接抛出异常:Access denied for user 'Administrator'@'localhost'
+     * @throws SQLException
+     */
+    @Test
+    public void testdataSource() throws SQLException {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        DataSource bean = (DataSource) applicationContext.getBean("dataSource");
+        System.out.println(bean.getConnection());
+    }
+
 }

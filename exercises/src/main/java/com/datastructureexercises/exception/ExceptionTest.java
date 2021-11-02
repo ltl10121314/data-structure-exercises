@@ -15,7 +15,7 @@ import java.util.Arrays;
  */
 public class ExceptionTest {
     ChannelSftp sftp = null;
-    private Logger logger = LoggerFactory.getLogger(ExceptionTest.class);
+    private Logger Logger = LoggerFactory.getLogger(ExceptionTest.class);
 
     @Test
     public void exception1Test() {
@@ -41,7 +41,7 @@ public class ExceptionTest {
         try {
             int a = 1 / 0;
         } catch (Exception e) {
-            logger.info(e.getMessage());
+            Logger.info(e.getMessage());
 //            System.out.println(e.getMessage());
 //            e.printStackTrace();
 //            System.out.println("==========");

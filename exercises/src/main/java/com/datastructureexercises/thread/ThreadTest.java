@@ -2,6 +2,8 @@ package com.datastructureexercises.thread;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -16,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  * @author Administrator
  */
 public class ThreadTest {
+    private final Logger LOGGER = LoggerFactory.getLogger(ThreadTest.class);
     ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("").build();
     private ThreadPoolExecutor pool = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
@@ -24,7 +27,6 @@ public class ThreadTest {
         final TaskQueue q = new TaskQueue();
         List<Thread> ts = new ArrayList<Thread>();
         for (int i = 0; i < 5; i++) {
-//            pool.execute();
             Thread t = new Thread() {
                 @Override
                 public void run() {
@@ -32,7 +34,7 @@ public class ThreadTest {
                     while (true) {
                         try {
                             String s = q.getTask();
-                            System.out.println("execute task: " + s);
+                            LOGGER.info("execute task: " + s);
                         } catch (InterruptedException e) {
                             return;
                         }
@@ -49,7 +51,7 @@ public class ThreadTest {
                 for (int i = 0; i < 10; i++) {
                     // 放入task:
                     String s = "t-" + Math.random();
-                    System.out.println("add task: " + s);
+                    LOGGER.info("add task: " + s);
                     q.addTask(s);
                     try {
                         Thread.sleep(100);

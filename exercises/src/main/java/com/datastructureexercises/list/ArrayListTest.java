@@ -1,23 +1,27 @@
 package com.datastructureexercises.list;
 
-import org.apache.commons.lang.StringUtils;
+
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.logging.Logger;
+
 import java.util.regex.Pattern;
 
 /**
  * @author Administrator
  */
 public class ArrayListTest {
-    Logger logger = Logger.getGlobal();
+    Logger Logger = LoggerFactory.getLogger(ArrayListTest.class);
+
     @Test
     public void arrayListTest() {
         ArrayList<String> strings = new ArrayList<String>();
         strings.add("hahah");
-        System.out.println(strings.get(0).getClass().getName());
+        Logger.info(strings.get(0).getClass().getName());
     }
 
     @Test
@@ -49,25 +53,27 @@ public class ArrayListTest {
 
     @Test
     public void threadTest() {
-        logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
+        Logger.info(Thread.currentThread().getStackTrace()[1].getMethodName());
         String oid = UUID.randomUUID().toString().replace("-", "");
-        logger.info(oid);
+        Logger.info(oid);
         String message = "";
-        logger.info(String.valueOf(StringUtils.isBlank(message)));
+        Logger.info(String.valueOf(StringUtils.isEmpty(message)));
         BigDecimal bigDecimal = new BigDecimal(0);
-        System.out.println(bigDecimal.toString());
+        Logger.info(bigDecimal.toString());
         ArrayList<Object> objects = new ArrayList<>();
         objects.size();
         String[] aa = {};
-        System.out.println(aa.length);
+        Logger.info(String.valueOf(aa.length));
     }
+
     @Test
-    public void test1(){
+    public void test1() {
         ArrayList<Object> objects = new ArrayList<>();
         objects = new ArrayList<Object>();
         objects.add("sadfa");
-        System.out.println(objects);
+        Logger.info(objects.toString());
     }
+
     public static void main(String args[]) {
         String str = "02";
         String pattern1 = ".*[,-].*";

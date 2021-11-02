@@ -69,14 +69,6 @@ class Students {
         return score == null ? -1 : score.intValue();
     }
 
-//    Integer findInList(String name) {
-//        for (var ss : this.list) {
-//            if (ss.name.equals(name)) {
-//                return ss.score;
-//            }
-//        }
-//        return null;
-//    }
 }
 
 class Student {
