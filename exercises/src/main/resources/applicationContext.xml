@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- bean 的作用域:singleton:单例的在IOC容器被创建的时候bean被创建(作用域默认是singleton)
+        prototype:原型:在IOC被创建的时候,bean对象不会被创建,在需要获取bean的时候被创建
+     -->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <!-- 使用外部的属性 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!-- 不同于以往的com.mysql.jdbc.Driver，现在改成了com.mysql.cj.jdbc.Driver -->
+        <property name="driverClassName" value="${driver}"/>
+        <!-- 记得更改数据库端口和名称 -->
+        <property name="url" value="${url}"/>
+        <!-- 用户名和密码 -->
+        <property name="username" value="${user}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+</beans>
