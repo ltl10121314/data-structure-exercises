@@ -17,6 +17,8 @@ public class TaskTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskTest.class);
 
     public static void main(String[] args) {
+        Integer integer = null;
+        System.out.println(integer);
         HashMap<String, String> map22 = new HashMap<>();
         map22.put("psnclname", "");
         String psnlName = map22.get("psnclname") != null ? map22.get("psnclname").toString() : null;
@@ -35,9 +37,9 @@ public class TaskTest {
         itemVOS.add(user2);
         List<Map<String, Object>> list = new ArrayList<>();
         Map<String, Object> p1 = new HashMap<>();
-        p1.put("zhangsan",new BigDecimal(12));
+        p1.put("zhangsan", new BigDecimal(12));
         Map<String, Object> p2 = new HashMap<>();
-        p2.put("lisi",new BigDecimal(23));
+        p2.put("lisi", new BigDecimal(23));
         list.add(p1);
         list.add(p2);
         //所有项目
@@ -61,5 +63,7 @@ public class TaskTest {
 //                .collect
         System.out.println(result.toString());
 
+
     }
+
 }
