@@ -15,22 +15,28 @@ public class XstreamTest {
     public static void main(String[] args) {
         String s = "{\"name\": \"lisi\",\"code\": \"hehe\"}";
         JSONObject jsonObject = JSONObject.parseObject(s);
-        log.info(jsonObject.getString("name"));
 
         BigDecimal bigDecimal = new BigDecimal("0");
-        log.info(String.valueOf(bigDecimal));
-        Map<String, String> map = new HashMap<>();
-        log.info("-----------");
-        String hehe = map.get(null);
-        log.info("------------");
-        log.info(hehe);
+        Map<Integer, User> map = new HashMap<>(8);
+        ArrayList<Map<Integer, User>> list = new ArrayList<>();
+        for (int i = 0; i < 10000; i++) {
+            User user = new User();
+            user.setName("zhangsan");
+            user.setAddr("Beijing");
+            user.setAge("12");
+            map.put(i, user);
+        }
+        list.add(map);
+        long start1 = System.currentTimeMillis();
+        long end1 = System.currentTimeMillis();
+        long start3 = System.currentTimeMillis();
+        long end3 = System.currentTimeMillis();
+
         String format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis());
-        log.info(format);
         try {
             int i = 1 / 1;
             List<String> objects = new ArrayList<>();
         } catch (Exception e) {
-            log.error("Load xml error : ", e);
 
         }
     }

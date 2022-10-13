@@ -11,7 +11,7 @@
 
     <modules>
         <module>exercises</module>
-        <module>LeetCode</module>
+<!--        <module>LeetCode</module>-->
     </modules>
     <dependencies>
         <!--日志相关-->
