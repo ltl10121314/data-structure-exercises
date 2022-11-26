@@ -3,16 +3,13 @@ package com.datastructureexercises.socket;
 import java.net.*;
 import java.io.*;
 
-public class GreetingClient
-{
-    public static void main(String [] args)
-    {
+public class GreetingClient {
+    public static void main(String[] args) {
 //        String serverName = args[0];
         String serverName = "localhost";
 //        int port = Integer.parseInt(args[1]);
         int port = Integer.parseInt("6066");
-        try
-        {
+        try {
             System.out.println("连接到主机：" + serverName + " ，端口号：" + port);
             Socket client = new Socket(serverName, port);
             System.out.println("远程主机地址：" + client.getRemoteSocketAddress());
@@ -24,8 +21,7 @@ public class GreetingClient
             DataInputStream in = new DataInputStream(inFromServer);
             System.out.println("服务器响应： " + in.readUTF());
             client.close();
-        }catch(IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -1,14 +1,13 @@
 package com.datastructureexercises.test;
 
-import com.alibaba.fastjson.JSON;
+import com.sun.deploy.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import org.apache.groovy.parser.antlr4.util.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.function.Function;
@@ -33,7 +32,7 @@ public class Task2Test {
     public static boolean isNeedParser(String formulastr) {
         Pattern numberPattern = compile("[0-9]*");
         boolean isneed = false;
-        if (StringUtils.isEmpty(formulastr)) {
+        if (formulastr==null) {
             return false;
         } else {
             formulastr = formulastr.replaceAll("\\.", "");
@@ -48,6 +47,19 @@ public class Task2Test {
         return md5;
     }
 
+    public static boolean isDate(String date) {
+        if (date == null) {
+            return false;
+        }
+        try {
+            Date date1 = DateUtils.parseDate(date, "yyyy-MM-dd");
+            System.out.println(date1);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
     @Test
     public void test1() {
         Object date = new Date();
@@ -56,46 +68,47 @@ public class Task2Test {
         log.info(substring);
         String format = new SimpleDateFormat("yyyy-MM-dd").format(date);
         log.info("{}", format);
+        Map<String, Set<String>> accountingDelegateBefore = new HashMap<>();
+        Set<String> hello = accountingDelegateBefore.get("hello");
+        System.out.println(hello);
+        log.info("-------------------------");
+        List<String> staffJobDtosUpdate = new ArrayList<>();
+        //编辑前状态为update的任职信息Id
+        List<String> updateOriginalIds = new ArrayList<>();
+        //状态为update的任职信息被引用
+        List<String> intersection = staffJobDtosUpdate.stream().filter(updateOriginalIds::contains).collect(Collectors.toList());
+        log.info(intersection.toString());
+        //状态为delete的任职信息被引用
+        List<String> reduceList = staffJobDtosUpdate.stream().filter(m -> !intersection.contains(m)).collect(Collectors.toList());
+        log.info(reduceList.toString());
+        List<User> list = new ArrayList<>();
+        List<String> collect = list.stream().map(User::getAge).collect(Collectors.toList());
+        log.info(collect.toString());
+
 
     }
 
     @Test
     public void test2() {
-        String str = "F_N_10";
-        String [] arr = str.split("_");
-        if (arr.length>1){
-            StringBuilder sb = new StringBuilder(arr[0]);
-            for (int i=1; i<arr.length; i++){
-                sb.append(arr[i].substring(0,1).toUpperCase());
-                if (arr[i].length()>1){
-                    sb.append(arr[i].substring(1));
-                }
-            }
-            System.out.println(sb.toString());
-        }
-        String s = "";
-        List<String> strings = Collections.singletonList(s);
-        System.out.println(strings);
-        List<String> orgPowerIds = Arrays.asList(s.split(","));
-        System.out.println(orgPowerIds);
-        Map<String, String> map = new HashMap<>();
-        String hehe = map.get("hehe");
-        System.out.println(hehe);
+        List<String> list = new ArrayList<>();
+        list.add("2022-10-01&2022-10-20");
+        list.add("2022-10-26&");
+        list.add("2022-10-21&2022-10-25");
+        System.out.println(list);
+        Collections.sort(list);
+        System.out.println(list);
     }
 
+    private Integer getSalaryLength(String number) {
+        String[] split = number.split("\\.");
+        if (split.length == 1) {
+            return 0;
+        } else {
+            return split[1].length();
+        }
+    }
     @Test
     public void test3() {
-        String s = "人力成本开发部牛逼屌炸天";
-        String json = "{\n" +
-                "  \"a\": \"12\"\n" +
-                "}";
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        String password = jsonObject.getOrDefault("password", "").toString();
-        log.info(password.getClass().toString());
-        String md5 = encrypt3ToMD5(s);
-        log.info(md5);
-        String string = JSON.toJSONString(null);
-        System.out.println(string);
         List<User> list = new ArrayList<>();
         List<User> list2 = new ArrayList<>();
         list.add(new User("a", "2", "京"));
@@ -105,28 +118,31 @@ public class Task2Test {
         list.add(new User("b", "6", "蒙"));
         list.add(new User("b", "7", "陕"));
         list2.add(new User("b", "7", "陕"));
-        list.removeAll(list2);
-        System.out.println(list);
-        Map<String, List<User>> collect = list.stream().collect(Collectors.groupingBy(User::getName));
-        System.out.println(collect);
+        HashMap<Object, Object> map = new HashMap<>();
+        Object heh = map.get("heh");
+        System.out.println(heh);
     }
 
     @Test
     public void test4() {
-        String id = "{\n" +
-                "  \"scopes\": []\n" +
-                "}";
-        JSONObject jsonObject = JSONObject.fromObject(id);
-        String scopes = jsonObject.getString("scopes");
-        JSONArray jsonArray = JSONArray.fromObject(scopes);
-        System.out.println(jsonArray.isEmpty());
+        for (int i = 0; i < 10; i++) {
+            switch (i){
+                case Utils.STAFF_CODE:
+                    System.out.println("hehe");
+                    break;
+                case 1:
+                    System.out.println("haha");
+                    break;
+                default:
+                    System.out.println("xixi");
+                    break;
+            }
+            System.out.println(i);
+        }
+    }
 
-        List<String> ids = new ArrayList<>();
-        ids.add("12");
-        Set<String> set = new HashSet<>();
-        List<String> allIds = new ArrayList<>(set);
-        ids.removeAll(allIds);
-        System.out.println(ids);
+    private Integer test77(Integer num){
+        return num;
     }
 
 
@@ -151,10 +167,10 @@ public class Task2Test {
         List<String> list2 = new ArrayList<>();
         list1.add("A");
         list1.add("B");
-        list1.add("B");
+        list1.add("C");
         list2.add("B");
-        list1.removeAll(list2);
-        System.out.println(list1);
+        String join = StringUtils.join(list1, ",");
+        System.out.println("薪资核算的定调薪档案中引用了此任职信息,JOB_ID:{0}".replace("{0}",join));
     }
 
     private void traversalCategory(Category next, List<String> categoryIdList, Iterator<Category> iterator){

@@ -3,36 +3,27 @@ package com.datastructureexercises.socket;
 import java.net.*;
 import java.io.*;
 
-public class GreetingServer extends Thread
-{
+public class GreetingServer extends Thread {
     private ServerSocket serverSocket;
 
-    public GreetingServer(int port) throws IOException
-    {
+    public GreetingServer(int port) throws IOException {
         serverSocket = new ServerSocket(port);
         serverSocket.setSoTimeout(10000);
     }
 
-    public static void main(String [] args)
-    {
-//        int port = Integer.parseInt(args[0]);
-        try
-        {
+    public static void main(String[] args) {
+        try {
             Thread t = new GreetingServer(6066);
             t.run();
-        }catch(IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void run()
-    {
-        while(true)
-        {
-            try
-            {
+    public void run() {
+        while (true) {
+            try {
                 System.out.println("等待远程连接，端口号为：" + serverSocket.getLocalPort() + "...");
                 Socket server = serverSocket.accept();
                 System.out.println("远程主机地址：" + server.getRemoteSocketAddress());
@@ -41,12 +32,10 @@ public class GreetingServer extends Thread
                 DataOutputStream out = new DataOutputStream(server.getOutputStream());
                 out.writeUTF("谢谢连接我：" + server.getLocalSocketAddress() + "\nGoodbye!");
                 server.close();
-            }catch(SocketTimeoutException s)
-            {
+            } catch (SocketTimeoutException s) {
                 System.out.println("Socket timed out!");
                 break;
-            }catch(IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
                 break;
             }
