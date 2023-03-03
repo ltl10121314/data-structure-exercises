@@ -42,5 +42,3 @@ rmi-client/*
 rmi-server/*
 /demo/.mvn/*
 /demo/log
-
-/demo/HELP.md
