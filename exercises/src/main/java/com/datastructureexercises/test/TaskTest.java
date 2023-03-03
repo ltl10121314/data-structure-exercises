@@ -1,5 +1,6 @@
 package com.datastructureexercises.test;
 
+import com.datastructureexercises.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,11 +25,11 @@ public class TaskTest {
         String psnlName = map22.get("psnclname") != null ? map22.get("psnclname").toString() : null;
         User user1 = new User();
         user1.setName("zhangsan");
-        user1.setAddr("北京");
+        user1.setAddress("北京");
         user1.setAge("12");
         User user2 = new User();
         user2.setName("lisi");
-        user2.setAddr("天津");
+        user2.setAddress("天津");
         user2.setAge("13");
         Map<String, Object> result = new HashMap<>();
 

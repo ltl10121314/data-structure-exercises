@@ -1,6 +1,7 @@
 package com.datastructureexercises.test;
 
 import com.alibaba.fastjson.JSONObject;
+import com.datastructureexercises.domain.User;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
@@ -22,7 +23,7 @@ public class XstreamTest {
         for (int i = 0; i < 10000; i++) {
             User user = new User();
             user.setName("zhangsan");
-            user.setAddr("Beijing");
+            user.setAddress("Beijing");
             user.setAge("12");
             map.put(i, user);
         }

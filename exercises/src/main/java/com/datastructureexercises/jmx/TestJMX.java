@@ -2,9 +2,8 @@ package com.datastructureexercises.jmx;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.rmi.runtime.Log;
 
-import javax.management.MBeanServer; //导入方法依赖的package包/类
+import javax.management.MBeanServer;
 import javax.management.ObjectName;
 import javax.management.Query;
 import java.lang.management.ManagementFactory;

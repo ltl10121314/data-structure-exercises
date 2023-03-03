@@ -1,7 +1,8 @@
 package com.datastructureexercises.test;
 
-import com.sun.deploy.util.StringUtils;
+import com.datastructureexercises.domain.User;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.springframework.util.DigestUtils;
@@ -111,13 +112,13 @@ public class Task2Test {
     public void test3() {
         List<User> list = new ArrayList<>();
         List<User> list2 = new ArrayList<>();
-        list.add(new User("a", "2", "京"));
-        list.add(new User("a", "3", "沪"));
-        list.add(new User("a", "4", "辽"));
-        list.add(new User("b", "5", "黑"));
-        list.add(new User("b", "6", "蒙"));
-        list.add(new User("b", "7", "陕"));
-        list2.add(new User("b", "7", "陕"));
+//        list.add(new User("a", "2", "京"));
+//        list.add(new User("a", "3", "沪"));
+//        list.add(new User("a", "4", "辽"));
+//        list.add(new User("b", "5", "黑"));
+//        list.add(new User("b", "6", "蒙"));
+//        list.add(new User("b", "7", "陕"));
+//        list2.add(new User("b", "7", "陕"));
         HashMap<Object, Object> map = new HashMap<>();
         Object heh = map.get("heh");
         System.out.println(heh);
@@ -156,7 +157,6 @@ public class Task2Test {
         Iterator<Category> iterator = itemCategoryList.iterator();
         while (iterator.hasNext()){
             Category next = iterator.next();
-            traversalCategory(next, categoryIdList, iterator);
         }
         log.info(itemCategoryList.toString());
     }
