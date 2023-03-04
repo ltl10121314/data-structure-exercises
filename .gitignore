@@ -40,5 +40,5 @@ buildNumber.properties
 LeetCode/*
 rmi-client/*
 rmi-server/*
-/demo/.mvn/*
+/demo/.mvn/wrapper
 /demo/log
