@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.domain.Student;
 import com.example.demo.domain.User;
 
 import java.util.List;
@@ -17,4 +18,11 @@ public interface UserService {
      * @return
      */
     List<User> findAll();
+
+    /**
+     * 插入学生逻辑
+     * @param student 学生
+     * @return
+     */
+    Student insert(Student student);
 }

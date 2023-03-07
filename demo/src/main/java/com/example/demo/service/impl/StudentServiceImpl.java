@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.domain.Student;
 import com.example.demo.mapper.StudentDao;
 import com.example.demo.service.StudentService;
+import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,8 +22,11 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentDao studentDao;
 
-//    @Autowired
-//    private StudentService studentService;
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 通过ID查询单条数据
@@ -54,7 +58,7 @@ public class StudentServiceImpl implements StudentService {
      * @return 实例对象
      */
     @Override
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(rollbackFor = Exception.class)
     public Student insert(Student student) {
         this.studentDao.insert(student);
         return student;
@@ -70,11 +74,23 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(rollbackFor = Exception.class)
     public Student update(Student student) {
         studentDao.update(student);
+        if (student.getId() != null) {
+            throw new RuntimeException("无语");
+        }
         return queryById(student.getId());
     }
 
-    private Student updateStudent(Student student) {
-        studentDao.update(student);
+    @Transactional(rollbackFor = Exception.class)
+    public Student updateStudent(Student student) {
+        Student student3 = new Student();
+        student3.setId("3");
+        student3.setAge(44);
+        student3.setName("李四");
+        userService.insert(student3);
+        if (student.getId() != null) {
+            throw new RuntimeException("无语");
+        }
+//        studentService.insert(student3);
         return queryById(student.getId());
     }
 
@@ -90,7 +106,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
+//    @Transactional(rollbackFor = Exception.class)
     public void updateAndInsert(Student student) {
         Student student1 = new Student();
         student1.setId("1");
@@ -100,9 +116,9 @@ public class StudentServiceImpl implements StudentService {
         student2.setId("2");
         student2.setAge(88);
         student2.setName("第二刀皇");
-        this.update(student1);
+//        studentService.update(student1);
         this.updateStudent(student2);
-        this.insert(student1);
+        studentService.insert(student1);
     }
 
 }

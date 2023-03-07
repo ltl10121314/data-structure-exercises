@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import com.example.demo.domain.Student;
 import com.example.demo.domain.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,4 +16,11 @@ public interface UserDao {
      * @return 返回用户实体
      */
     List<User> findAll();
+
+    /**
+     * 插入学生信息
+     * @param student 学生
+     * @return 学生
+     */
+    int insert(Student student);
 }
