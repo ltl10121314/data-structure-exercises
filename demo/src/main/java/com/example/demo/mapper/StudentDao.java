@@ -21,7 +21,7 @@ public interface StudentDao {
      * @param id 主键
      * @return 实例对象
      */
-    Student queryById(Integer id);
+    Student queryById(String id);
 
     /**
      * 查询指定行数据
@@ -63,7 +63,7 @@ public interface StudentDao {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(Integer id);
+    int deleteById(String id);
 
 }
 

@@ -33,7 +33,7 @@ public class StudentController {
      * @return 单条数据
      */
     @GetMapping("selectOne")
-    public Student selectOne(Integer id) {
+    public Student selectOne(String id) {
         log.info("hello world");
         return this.studentService.queryById(id);
     }

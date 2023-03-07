@@ -18,7 +18,7 @@ public interface StudentService {
      * @param id 主键
      * @return 实例对象
      */
-    Student queryById(Integer id);
+    Student queryById(String id);
 
     /**
      * 查询多条数据
@@ -51,6 +51,12 @@ public interface StudentService {
      * @param id 主键
      * @return 是否成功
      */
-    boolean deleteById(Integer id);
+    boolean deleteById(String id);
+
+    /**
+     * 测试事物回滚
+     * @param student
+     */
+    void updateAndInsert(Student student);
 
 }

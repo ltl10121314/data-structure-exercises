@@ -18,7 +18,7 @@ public class Student  {
     /**
      * 唯一标识id
      */
-    private Integer id;
+    private String id;
     /**
      * 姓名
      */

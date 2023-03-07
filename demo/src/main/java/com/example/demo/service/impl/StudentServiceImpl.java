@@ -1,10 +1,11 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.mapper.StudentDao;
 import com.example.demo.domain.Student;
+import com.example.demo.mapper.StudentDao;
 import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,9 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentDao studentDao;
 
+//    @Autowired
+//    private StudentService studentService;
+
     /**
      * 通过ID查询单条数据
      *
@@ -27,7 +31,7 @@ public class StudentServiceImpl implements StudentService {
      * @return 实例对象
      */
     @Override
-    public Student queryById(Integer id) {
+    public Student queryById(String id) {
         return studentDao.queryById(id);
     }
 
@@ -35,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
      * 查询多条数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     @Override
@@ -50,6 +54,7 @@ public class StudentServiceImpl implements StudentService {
      * @return 实例对象
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Student insert(Student student) {
         this.studentDao.insert(student);
         return student;
@@ -62,7 +67,13 @@ public class StudentServiceImpl implements StudentService {
      * @return 实例对象
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Student update(Student student) {
+        studentDao.update(student);
+        return queryById(student.getId());
+    }
+
+    private Student updateStudent(Student student) {
         studentDao.update(student);
         return queryById(student.getId());
     }
@@ -74,7 +85,24 @@ public class StudentServiceImpl implements StudentService {
      * @return 是否成功
      */
     @Override
-    public boolean deleteById(Integer id) {
+    public boolean deleteById(String id) {
         return studentDao.deleteById(id) > 0;
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateAndInsert(Student student) {
+        Student student1 = new Student();
+        student1.setId("1");
+        student1.setAge(77);
+        student1.setName("第一邪皇");
+        Student student2 = new Student();
+        student2.setId("2");
+        student2.setAge(88);
+        student2.setName("第二刀皇");
+        this.update(student1);
+        this.updateStudent(student2);
+        this.insert(student1);
+    }
+
 }

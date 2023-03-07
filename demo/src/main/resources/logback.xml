@@ -6,17 +6,19 @@
     <!-- root日志级别 -->
     <property name="LOG_LEVEL" value="INFO"/>
 
-    <!-- 控制台日志 -->
+    <!--控制台日志 -->
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %-5level %class{36}#%M [line:%L] - %msg%xEx%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %-5level %class{36}#%M
+                [line:%L] - %msg%xEx%n
+            </pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>${LOG_LEVEL}</level>
         </filter>
     </appender>
 
-    <!-- 文件日志 -->
+    <!--文件日志 -->
     <appender name="fileLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${LOG_HOME}/${FILE_LOG_NAME}.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -27,7 +29,9 @@
             </TimeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %-5level %class{36}#%M [line:%L] - %msg%xEx%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{X-B3-TraceId:-},%X{X-B3-SpanId:-}] %-5level %class{36}#%M
+                [line:%L] - %msg%xEx%n
+            </pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>${LOG_LEVEL}</level>
@@ -35,7 +39,7 @@
     </appender>
 
 
-    <!-- 项目级别 根目录 -->
+    <!--项目级别 根目录 -->
     <logger name="org.corp.core" level="INFO" additivity="false">
         <appender-ref ref="fileLog"/>
         <appender-ref ref="consoleLog"/>
