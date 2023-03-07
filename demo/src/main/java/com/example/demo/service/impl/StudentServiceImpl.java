@@ -58,9 +58,10 @@ public class StudentServiceImpl implements StudentService {
      * @return 实例对象
      */
     @Override
-//    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public Student insert(Student student) {
-        this.studentDao.insert(student);
+        studentDao.update(student);
+        studentDao.insert(student);
         return student;
     }
 
@@ -74,9 +75,9 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(rollbackFor = Exception.class)
     public Student update(Student student) {
         studentDao.update(student);
-        if (student.getId() != null) {
-            throw new RuntimeException("无语");
-        }
+//        if (student.getId() != null) {
+//            throw new RuntimeException("无语");
+//        }
         return queryById(student.getId());
     }
 
@@ -116,9 +117,9 @@ public class StudentServiceImpl implements StudentService {
         student2.setId("2");
         student2.setAge(88);
         student2.setName("第二刀皇");
-//        studentService.update(student1);
+//        studentService.update(student2);
         this.updateStudent(student2);
-        studentService.insert(student1);
+//        studentService.insert(student1);
     }
 
 }
