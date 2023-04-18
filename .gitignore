@@ -5,6 +5,7 @@
 
 # Log file
 *.log
+*.logs
 
 # BlueJ files
 *.ctxt
@@ -38,7 +39,9 @@ buildNumber.properties
 .idea
 *.iml
 LeetCode/*
-rmi-client/*
-rmi-server/*
-/demo/.mvn/wrapper
 /demo/log
+/log
+/logs
+/exercises/logs
+/demo/.mvn
+

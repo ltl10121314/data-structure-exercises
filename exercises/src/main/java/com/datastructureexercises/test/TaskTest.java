@@ -1,70 +1,85 @@
 package com.datastructureexercises.test;
 
-import com.datastructureexercises.domain.User;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author liutianlong
  */
+@Slf4j
 public class TaskTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskTest.class);
 
     public static void main(String[] args) {
-        Integer integer = null;
-        System.out.println(integer);
-        HashMap<String, String> map22 = new HashMap<>();
-        map22.put("psnclname", "");
-        String psnlName = map22.get("psnclname") != null ? map22.get("psnclname").toString() : null;
-        User user1 = new User();
-        user1.setName("zhangsan");
-        user1.setAddress("北京");
-        user1.setAge("12");
-        User user2 = new User();
-        user2.setName("lisi");
-        user2.setAddress("天津");
-        user2.setAge("13");
-        Map<String, Object> result = new HashMap<>();
+        boolean a = true;
+        double v1 = 0.1;
+        double v2 = 0.2;
+        double v3 = v1 + v2;
+        System.out.println(v3);
+        boolean notEmpty = StringUtils.isNotBlank(null + "");
+        System.out.println(notEmpty);
+        Object object1 = 123.0;
+        Object value = null;
+        // 格式化number String字符
+        DecimalFormat df = new DecimalFormat("0");
+        // 日期格式化
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+        // 格式化数字
+        DecimalFormat df2 = new DecimalFormat("0");
+        Object object = 999;
+        if (ObjectUtils.isEmpty(object)) {
+            log.info("返回为空");
+            return;
+        }
+        if (!isDate(String.valueOf(object))) {
+            log.info("非日期格式");
+            return;
+        }
+        if(!DateUtil.isDate(String.valueOf(object))){
+            log.info("非日期格式2");
+            return;
+        }
 
-        List<User> itemVOS = new ArrayList<>();
-        itemVOS.add(user1);
-        itemVOS.add(user2);
-        List<Map<String, Object>> list = new ArrayList<>();
-        Map<String, Object> p1 = new HashMap<>();
-        p1.put("zhangsan", new BigDecimal(12));
-        Map<String, Object> p2 = new HashMap<>();
-        p2.put("lisi", new BigDecimal(23));
-        list.add(p1);
-        list.add(p2);
-        //所有项目
-        List<String> itemCodes = itemVOS.stream().map(User::getName).collect(Collectors.toList());
-        System.out.println(itemCodes.toString());
-        System.out.println(list.toString());
-        result = itemCodes.stream()
-                .filter(key -> key != null)
-                .collect(
-                        Collectors.toMap(
-                                key -> key,
-                                key -> list.stream()
-                                        .filter(map -> map.get(key) != null)
-                                        .mapToDouble(
-                                                map -> Double.valueOf(map.get(key).toString())
-                                        ).sum()
-                        )
-                );
-//        result = itemCodes.stream()
-//                .filter(key -> key != null)
-//                .collect
-        System.out.println(result.toString());
-
+        if ((DateUtil.StringToDate(String.valueOf(object), DateStyle.YYYY_MM_DD) == null)) {
+            log.info("日期范围必须在{1753 年 1 月 1 日到 9999 年 12 月 31 日}之间");
+            return;
+        }
 
     }
 
+    public static String cleanXSS(String value) {
+        if (StringUtils.isEmpty(value)) {
+            return value;
+        }
+        //在这里自定义需要过滤的字符
+        value = value.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+        value = value.replaceAll("\\(", "&#40;").replaceAll("\\)", "&#41;");
+        value = value.replaceAll("'", "&#39;");
+        value = value.replaceAll("eval\\((.*)", "");
+        value = value.replaceAll("[\"'][s]*javascript:(.*)[\"']", "\"\"");
+        value = value.replaceAll("<script>", "");
+        return value;
+    }
+    public static boolean isDate(String date) {
+        if (date == null) {
+            return false;
+        }
+        try {
+            DateUtils.parseDate(date, "yyyy-MM-dd");
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
 }

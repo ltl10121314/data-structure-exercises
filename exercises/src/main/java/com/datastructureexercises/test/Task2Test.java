@@ -26,8 +26,38 @@ public class Task2Test {
     public static ThreadLocal<String> isExistDynamicAuthToken = new ThreadLocal<>();
 
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws InterruptedException {
+        double v_1 = 101.9;
+        double v_2 = 91.2;
+        double v_3 = 81.3;
+        double v = v_1 + v_2 + v_3;
+        System.out.println(v);
+        String fileName = String.format("导出-%s.xls","hehe");
+        System.out.println(fileName);
+        List<User> userList = new ArrayList<>();
+        User user_1 = new User();
+        user_1.setId("1");
+        user_1.setName("hahahah");
+        user_1.setOrderId(1);
+        user_1.setCreationTime(new Date());
+        Thread.sleep(1000);
+        User user_2 = new User();
+        user_2.setId("1");
+        user_2.setName("heheheh");
+        user_2.setOrderId(2);
+        user_2.setCreationTime(new Date());
+        Thread.sleep(1000);
+        User user_3 = new User();
+        user_3.setId("1");
+        user_3.setName("xixixix");
+        user_3.setCreationTime(new Date());
+        userList.add(user_1);
+        userList.add(user_2);
+        userList.add(user_3);
+        userList = userList.stream().sorted(Comparator.comparing(User::getCreationTime,Comparator.nullsFirst(Date::compareTo)).reversed()).collect(Collectors.toList());
+        log.info("userList:{}",userList);
+        List<User> waStaffNumVOS = userList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(()-> new TreeSet<>(Comparator.comparing(User::getId))),ArrayList::new));
+        log.info("waStaffNumVOS:{}",waStaffNumVOS);
     }
 
     public static boolean isNeedParser(String formulastr) {

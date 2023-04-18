@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @author liutianlong
  */
@@ -16,4 +18,6 @@ public class User {
     private String name;
     private String age;
     private String address;
+    private int orderId;
+    private Date creationTime;
 }

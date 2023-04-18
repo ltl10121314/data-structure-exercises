@@ -99,12 +99,12 @@
             <scope>test</scope>
         </dependency>
 
-<!--        &lt;!&ndash;日志相关&ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>ch.qos.logback</groupId>-->
-<!--            <artifactId>logback-classic</artifactId>-->
-<!--            <version>1.2.3</version>-->
-<!--        </dependency>-->
+        <!--日志相关-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
+        </dependency>
         <!--单元测试-->
         <dependency>
             <groupId>junit</groupId>
@@ -135,12 +135,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.slf4j</groupId>-->
-        <!--            <artifactId>slf4j-nop</artifactId>-->
-        <!--            <version>1.7.2</version>-->
-        <!--        </dependency>-->
-        <!-- https://mvnrepository.com/artifact/com.jcraft.jsch/com.springsource.com.jcraft.jsch -->
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-nop</artifactId>-->
+<!--            <version>1.7.2</version>-->
+<!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.jcraft.jsch/com.springsource.com.jcraft.jsch-->
         <dependency>
             <groupId>com.jcraft.jsch</groupId>
             <artifactId>com.springsource.com.jcraft.jsch</artifactId>
@@ -197,6 +197,20 @@
                     <groupId>org.slf4j</groupId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.owasp.esapi/esapi -->
+        <dependency>
+            <groupId>org.owasp.esapi</groupId>
+            <artifactId>esapi</artifactId>
+            <version>2.3.0.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>5.2.2</version>
         </dependency>
 
     </dependencies>
