@@ -1,7 +1,7 @@
 package com.datastructureexercises.socket;
 
-import java.net.*;
 import java.io.*;
+import java.net.Socket;
 
 public class GreetingClient {
     public static void main(String[] args) {

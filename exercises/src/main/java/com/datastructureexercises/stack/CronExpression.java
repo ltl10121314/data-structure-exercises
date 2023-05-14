@@ -7,7 +7,9 @@ import org.quartz.TriggerUtils;
 import org.quartz.impl.triggers.CronTriggerImpl;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class CronExpression {
     public Object validateCronExpression(JSONObject variable) {

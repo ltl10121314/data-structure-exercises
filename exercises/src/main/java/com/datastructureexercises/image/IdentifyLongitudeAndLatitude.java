@@ -29,16 +29,16 @@ public class IdentifyLongitudeAndLatitude {
             for (Tag tag : directory.getTags()) {
                 String tagName = tag.getTagName();
                 String desc = tag.getDescription();
-                if (tagName.equals("Image Height")) {
+                if ("Image Height".equals(tagName)) {
                     System.out.println("图片高度: " + desc);
-                } else if (tagName.equals("Image Width")) {
+                } else if ("Image Width".equals(tagName)) {
                     System.out.println("图片宽度: " + desc);
-                } else if (tagName.equals("Date/Time Original")) {
+                } else if ("Date/Time Original".equals(tagName)) {
                     System.out.println("拍摄时间: " + desc);
-                } else if (tagName.equals("GPS Latitude")) {
+                } else if ("GPS Latitude".equals(tagName)) {
                     System.err.println("纬度 : " + desc);
                     System.err.println("纬度(度分秒格式) : " + pointToLatlong(desc));
-                } else if (tagName.equals("GPS Longitude")) {
+                } else if ("GPS Longitude".equals(tagName)) {
                     System.err.println("经度: " + desc);
                     System.err.println("经度(度分秒格式): " + pointToLatlong(desc));
                 }

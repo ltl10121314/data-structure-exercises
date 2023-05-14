@@ -1,7 +1,7 @@
 package com.datastructureexercises.jwt;
 
 import net.sf.json.JSONObject;
-import java.io.UnsupportedEncodingException;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 

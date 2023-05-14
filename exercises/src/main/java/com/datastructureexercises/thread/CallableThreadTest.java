@@ -61,7 +61,8 @@ public class CallableThreadTest implements Callable<Integer> {
 //                    IOUtils.closeQuietly(in);
                 }
             }
-        }, "输入输出"); // 线程的名字
+            // 线程的名字
+        }, "输入输出");
 
         // 启动
         t.start();
@@ -96,7 +97,8 @@ public class CallableThreadTest implements Callable<Integer> {
                     }
                 }
             }
-        }, "socket线程"); // 线程的名字
+            // 线程的名字
+        }, "socket线程");
         serverThread.start();
 
         // 确保run已经得到执行

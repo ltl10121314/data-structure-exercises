@@ -28,7 +28,7 @@ public class ReflectionTest {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 LOGGER.info(method.toString());
-                if (method.getName().equals("morning")) {
+                if ("morning".equals(method.getName())) {
                     LOGGER.info("Good morning, " + args[0]);
                 }
                 return null;

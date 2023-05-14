@@ -1,4 +1,4 @@
-package com.datastructureexercises.Constructor;
+package com.datastructureexercises.constructor;
 
 import java.util.Arrays;
 import java.util.List;

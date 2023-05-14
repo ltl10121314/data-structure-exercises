@@ -1,4 +1,4 @@
-package com.datastructureexercises.Tree;
+package com.datastructureexercises.tree;
 
 import java.util.Stack;
 

@@ -1,9 +1,9 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.domain.Student;
+import com.example.demo.domain.User;
 import com.example.demo.mapper.StudentDao;
 import com.example.demo.mapper.UserDao;
-import com.example.demo.domain.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
