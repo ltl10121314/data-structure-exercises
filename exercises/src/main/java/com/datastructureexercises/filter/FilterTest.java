@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.FilterInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author liutianlong
@@ -14,11 +15,11 @@ import java.io.IOException;
  * @description
  */
 public class FilterTest {
-    private static Logger log = LoggerFactory.getLogger(FilterTest.class);
+    private static final Logger log = LoggerFactory.getLogger(FilterTest.class);
 
     @Test
     public void infoTest() throws Exception {
-        byte[] data = "hello, world!".getBytes("UTF-8");
+        byte[] data = "hello, world!".getBytes(StandardCharsets.UTF_8);
         log.info(String.valueOf(data));
         try (CountInputStream input = new CountInputStream(new ByteArrayInputStream(data))) {
             int n;

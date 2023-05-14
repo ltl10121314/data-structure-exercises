@@ -15,7 +15,7 @@ import java.util.Arrays;
  */
 public class ExceptionTest {
     ChannelSftp sftp = null;
-    private Logger Logger = LoggerFactory.getLogger(ExceptionTest.class);
+    private final Logger Logger = LoggerFactory.getLogger(ExceptionTest.class);
 
     @Test
     public void exception1Test() {

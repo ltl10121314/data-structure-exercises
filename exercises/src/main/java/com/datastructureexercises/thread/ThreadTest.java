@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class ThreadTest {
     private final Logger LOGGER = LoggerFactory.getLogger(ThreadTest.class);
     ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("").build();
-    private ThreadPoolExecutor pool = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+    private final ThreadPoolExecutor pool = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
     @Test
     public void threadTest() throws InterruptedException {

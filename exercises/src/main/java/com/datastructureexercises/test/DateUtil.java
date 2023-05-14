@@ -932,7 +932,7 @@ public class DateUtil {
 			String keyValueForDate = null;
 
 			while (dd.getTime().compareTo(d2) <= 0) {// 判断是否到结束日期
-				keyValueForDate = new String();
+				keyValueForDate = "";
 				cale.setTime(dd.getTime());
 
 				if (dd.getTime().equals(d1)) {
@@ -956,7 +956,7 @@ public class DateUtil {
 			}
 
 			if (endDay < startDay) {
-				keyValueForDate = new String();
+				keyValueForDate = "";
 
 				cale.setTime(d2);
 				cale.set(Calendar.DAY_OF_MONTH, 1);// 取第一天

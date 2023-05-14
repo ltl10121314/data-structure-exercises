@@ -2,6 +2,7 @@ package com.datastructureexercises.jwt;
 
 import net.sf.json.JSONObject;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class JWTtoken {
@@ -14,11 +15,7 @@ public class JWTtoken {
         obj.element("isAdmin", "");
         obj.element("roles", "");
         String userInfo = null;
-        try {
-            userInfo = Base64.getEncoder().encodeToString(obj.toString().getBytes("UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+        userInfo = Base64.getEncoder().encodeToString(obj.toString().getBytes(StandardCharsets.UTF_8));
         System.out.println("userInfo:"+userInfo);
     }
 }

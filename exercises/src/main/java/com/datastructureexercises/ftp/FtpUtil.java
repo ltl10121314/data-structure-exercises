@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -128,7 +129,7 @@ public class FtpUtil {
             b = ftpClient.changeWorkingDirectory(remoteFileName);
             log.info("*****改变目录是否成功：" + b);
             String remoteFile = remoteFileName + file.getName();
-            b = ftpClient.storeFile(new String(remoteFile.getBytes("GB2312"), "ISO-8859-1"), input);
+            b = ftpClient.storeFile(new String(remoteFile.getBytes("GB2312"), StandardCharsets.ISO_8859_1), input);
             if (b) {
                 log.info(" ****** 标志文件" + localFileName + "上传成功!");
             }

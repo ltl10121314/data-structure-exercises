@@ -34,9 +34,9 @@ public enum DateStyle {
 	MM_DD_HH_MM_CN("P_YS_HR_HRXC_0000110861" /* "MM月dd日 HH:mm" */, true),
 	MM_DD_HH_MM_SS_CN("P_YS_HR_HRXC_0000110787" /* "MM月dd日 HH:mm:ss" */, true);
 	
-	private String value;
+	private final String value;
 	
-	private boolean isShowOnly;
+	private final boolean isShowOnly;
 	
 	DateStyle(String value, boolean isShowOnly) {
 		this.value = value;

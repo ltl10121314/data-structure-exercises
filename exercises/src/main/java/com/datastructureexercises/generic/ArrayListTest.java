@@ -21,7 +21,7 @@ public class ArrayListTest {
             System.out.println(iterator.next());
             iterator.remove();
         }
-        System.out.println(objects.toString());
+        System.out.println(objects);
     }
 
     @Test

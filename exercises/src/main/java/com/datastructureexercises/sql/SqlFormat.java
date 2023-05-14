@@ -12,18 +12,17 @@ public class SqlFormat {
         String sql = "select etl_calc_resource.Queue_Name as resourceQueueName from etl_calc_resource " +
                 " where id = '" + "' " +
                 " and tenant_id = '" + "'";
-        ;
         sqlFormat(sql);
     }
 
     /**
      * 需要换行的字段
      */
-    private static Map<String, String> map = new HashMap<String, String>();
+    private static final Map<String, String> map = new HashMap<String, String>();
     /**
      * 括号前关键字
      */
-    private static Map<String, String> bracket = new HashMap<String, String>();
+    private static final Map<String, String> bracket = new HashMap<String, String>();
 
     static {
         map.put("select", "select");

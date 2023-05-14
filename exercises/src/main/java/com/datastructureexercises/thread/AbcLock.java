@@ -11,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class AbcLock {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbcLock.class);
-    private static Lock lock = new ReentrantLock();
+    private static final Lock lock = new ReentrantLock();
     private static int state = 0;
 
     public static void main(String[] args) {

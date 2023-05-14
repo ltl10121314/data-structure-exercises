@@ -8,10 +8,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author liutianlong
  */
 public class AbcCondition {
-    private static Lock lock = new ReentrantLock();
-    private static Condition A = lock.newCondition();
-    private static Condition B = lock.newCondition();
-    private static Condition C = lock.newCondition();
+    private static final Lock lock = new ReentrantLock();
+    private static final Condition A = lock.newCondition();
+    private static final Condition B = lock.newCondition();
+    private static final Condition C = lock.newCondition();
     private static int count = 0;
 
     public static void main(String[] args) {

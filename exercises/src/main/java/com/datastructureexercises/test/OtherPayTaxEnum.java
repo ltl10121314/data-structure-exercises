@@ -13,7 +13,7 @@ public enum OtherPayTaxEnum {
     private String index;
 
     // 构造方法
-    private OtherPayTaxEnum(String name, String index) {
+    OtherPayTaxEnum(String name, String index) {
         this.name = name;
         this.index = index;
     }

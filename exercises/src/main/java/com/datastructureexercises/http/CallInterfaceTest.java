@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -163,7 +164,7 @@ public class CallInterfaceTest {
         //服务器返回东西了，先对响应码判断
         String result = "";
         if (conn.getResponseCode() == 200) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
             String line = "";
             while (null != (line = br.readLine())) {
                 result += line;

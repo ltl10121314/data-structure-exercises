@@ -10,7 +10,7 @@ public class ArrayStack {
     /**
      * 数组
      */
-    private String[] items;
+    private final String[] items;
     /**
      * 栈中元素个数
      */
@@ -18,7 +18,7 @@ public class ArrayStack {
     /**
      * 栈的大小
      */
-    private int n;
+    private final int n;
 
     /**
      * 初始化数组，申请一个大小为n的数组空间

@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author Administrator
  */
 public class GetListFile {
-    private static Logger log = LoggerFactory.getLogger(GetListFile.class);
+    private static final Logger log = LoggerFactory.getLogger(GetListFile.class);
 
     public static void main(String[] args) throws IOException {
 //        showFileName("D:\\downloads\\合并\\合并\\lib.zip");

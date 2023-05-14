@@ -42,7 +42,7 @@ public class Test {
 }
 
 class MyCallable implements Callable<Object> {
-    private String taskNum;
+    private final String taskNum;
 
     MyCallable(String taskNum) {
         this.taskNum = taskNum;

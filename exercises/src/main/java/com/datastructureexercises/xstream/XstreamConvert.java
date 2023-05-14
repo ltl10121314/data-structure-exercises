@@ -20,7 +20,7 @@ public class XstreamConvert {
         JSONArray extAttrList = new JSONArray();
         if(extAttrList.isEmpty()){
             System.out.println("--------------");
-        };
+        }
         ArrayList<Object> objects = new ArrayList<>();
         boolean empty = objects.isEmpty();
         System.out.println(empty);

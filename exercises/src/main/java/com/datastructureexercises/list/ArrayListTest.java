@@ -31,7 +31,7 @@ public class ArrayListTest {
         map.put("pear", 13);
         map.put("banana", 15);
         Collection<Integer> values = map.values();
-        System.out.println(values.toString());
+        System.out.println(values);
         for (String key : map.keySet()) {
             Integer integer = map.get(key);
             System.out.println(integer);
@@ -74,7 +74,7 @@ public class ArrayListTest {
         Logger.info(objects.toString());
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         String str = "02";
         String pattern1 = ".*[,-].*";
         String pattern2 = ".*/0*";

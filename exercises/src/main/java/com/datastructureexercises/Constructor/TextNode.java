@@ -7,7 +7,7 @@ import java.util.List;
  * @author liutianlong
  */
 public class TextNode implements Node {
-    private String text;
+    private final String text;
 
     public TextNode(String text) {
         this.text = text;

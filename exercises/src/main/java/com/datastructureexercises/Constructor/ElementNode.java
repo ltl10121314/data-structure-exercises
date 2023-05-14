@@ -8,8 +8,8 @@ import java.util.StringJoiner;
  * @author liutianlong
  */
 public class ElementNode implements Node {
-    private String name;
-    private List<Node> list = new ArrayList<>();
+    private final String name;
+    private final List<Node> list = new ArrayList<>();
 
     public ElementNode(String name) {
         this.name = name;
