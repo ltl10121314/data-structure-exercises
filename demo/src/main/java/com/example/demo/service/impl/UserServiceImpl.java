@@ -35,7 +35,6 @@ public class UserServiceImpl implements UserService {
     @Transactional(rollbackFor = Exception.class)
     public Student insert(Student student) {
         studentDao.insert(student);
-        studentDao.insert(student);
         return student;
     }
 }

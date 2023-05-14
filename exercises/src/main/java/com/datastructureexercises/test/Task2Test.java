@@ -1,7 +1,10 @@
 package com.datastructureexercises.test;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.datastructureexercises.domain.User;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
@@ -27,13 +30,24 @@ public class Task2Test {
 
 
     public static void main(String[] args) throws InterruptedException {
-        double v_1 = 101.9;
-        double v_2 = 91.2;
-        double v_3 = 81.3;
-        double v = v_1 + v_2 + v_3;
-        System.out.println(v);
-        String fileName = String.format("导出-%s.xls","hehe");
-        System.out.println(fileName);
+        //language=JSON5
+        String params = "{\"payfileIds\":[\"1680034895253995521\"],\"staffIds\":[],\"tenantId\":\"0000L6YTYEY5FUZPXE0000\",\"templatecode\":\"u8c1681962355000\"}";
+        JSONObject paramObj = JSONObject.parseObject(params);
+        String staffIdsStr = paramObj.get("staffIds").toString();
+        List<String> staffIds = JSONArray.parseArray(staffIdsStr,String.class);
+        log.info(staffIds.toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateNow = dateFormat.format(new Date());
+        log.info(dateNow);
+        JSONObject dd = new JSONObject();
+        Object isApproved = dd.get("isApproved");
+        System.out.println(isApproved);
+        HashMap<Object, Object> map = new HashMap<>();
+        Object haha = map.get("haha");
+        System.out.println(haha);
+    }
+
+    private static void testListSort() throws InterruptedException {
         List<User> userList = new ArrayList<>();
         User user_1 = new User();
         user_1.setId("1");
@@ -54,8 +68,10 @@ public class Task2Test {
         userList.add(user_1);
         userList.add(user_2);
         userList.add(user_3);
+        // 列表对象排序
         userList = userList.stream().sorted(Comparator.comparing(User::getCreationTime,Comparator.nullsFirst(Date::compareTo)).reversed()).collect(Collectors.toList());
         log.info("userList:{}",userList);
+        // 列表对象去重
         List<User> waStaffNumVOS = userList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(()-> new TreeSet<>(Comparator.comparing(User::getId))),ArrayList::new));
         log.info("waStaffNumVOS:{}",waStaffNumVOS);
     }
@@ -93,29 +109,6 @@ public class Task2Test {
 
     @Test
     public void test1() {
-        Object date = new Date();
-        String st = "F_N_20";
-        String substring = st.substring(0, 4);
-        log.info(substring);
-        String format = new SimpleDateFormat("yyyy-MM-dd").format(date);
-        log.info("{}", format);
-        Map<String, Set<String>> accountingDelegateBefore = new HashMap<>();
-        Set<String> hello = accountingDelegateBefore.get("hello");
-        System.out.println(hello);
-        log.info("-------------------------");
-        List<String> staffJobDtosUpdate = new ArrayList<>();
-        //编辑前状态为update的任职信息Id
-        List<String> updateOriginalIds = new ArrayList<>();
-        //状态为update的任职信息被引用
-        List<String> intersection = staffJobDtosUpdate.stream().filter(updateOriginalIds::contains).collect(Collectors.toList());
-        log.info(intersection.toString());
-        //状态为delete的任职信息被引用
-        List<String> reduceList = staffJobDtosUpdate.stream().filter(m -> !intersection.contains(m)).collect(Collectors.toList());
-        log.info(reduceList.toString());
-        List<User> list = new ArrayList<>();
-        List<String> collect = list.stream().map(User::getAge).collect(Collectors.toList());
-        log.info(collect.toString());
-
 
     }
 

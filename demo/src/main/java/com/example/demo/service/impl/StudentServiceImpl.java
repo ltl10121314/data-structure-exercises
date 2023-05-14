@@ -83,14 +83,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Transactional(rollbackFor = Exception.class)
     public Student updateStudent(Student student) {
-        Student student3 = new Student();
-        student3.setId("3");
-        student3.setAge(44);
-        student3.setName("李四");
-        userService.insert(student3);
-        if (student.getId() != null) {
-            throw new RuntimeException("无语");
-        }
+//        Student student3 = new Student();
+//        student3.setId("3");
+//        student3.setAge(44);
+//        student3.setName("李四");
+//        userService.insert(student3);
+//        if (student.getId() != null) {
+//            throw new RuntimeException("无语");
+//        }
 //        studentService.insert(student3);
         return queryById(student.getId());
     }
