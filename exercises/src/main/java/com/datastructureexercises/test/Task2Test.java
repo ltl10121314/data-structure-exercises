@@ -13,6 +13,8 @@ import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -29,21 +31,15 @@ public class Task2Test {
 
 
     public static void main(String[] args) throws InterruptedException {
-        //language=JSON5
-        String params = "{\"payfileIds\":[\"1680034895253995521\"],\"staffIds\":[],\"tenantId\":\"0000L6YTYEY5FUZPXE0000\",\"templatecode\":\"u8c1681962355000\"}";
-        JSONObject paramObj = JSONObject.parseObject(params);
-        String staffIdsStr = paramObj.get("staffIds").toString();
-        List<String> staffIds = JSONArray.parseArray(staffIdsStr,String.class);
-        log.info(staffIds.toString());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String dateNow = dateFormat.format(new Date());
-        log.info(dateNow);
-        JSONObject dd = new JSONObject();
-        Object isApproved = dd.get("isApproved");
-        System.out.println(isApproved);
-        HashMap<Object, Object> map = new HashMap<>();
-        Object haha = map.get("haha");
-        System.out.println(haha);
+        try{
+            SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
+            String time = formatterTime.format("99999");
+        }catch (Exception e) {
+
+            System.out.println("aa");
+        }
+        Map<String, String> map = new HashMap<>();
+        Set<String> strings = map.keySet();
     }
 
     private static void testListSort() throws InterruptedException {
@@ -73,6 +69,7 @@ public class Task2Test {
         // 列表对象去重
         List<User> waStaffNumVOS = userList.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(()-> new TreeSet<>(Comparator.comparing(User::getId))),ArrayList::new));
         log.info("waStaffNumVOS:{}",waStaffNumVOS);
+        log.info(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 
     public static boolean isNeedParser(String formulastr) {
@@ -108,7 +105,18 @@ public class Task2Test {
 
     @Test
     public void test1() {
-
+        List<String> list1 = new ArrayList<>();
+        list1.add("a");
+        list1.add("b");
+        List<String> list2 = new ArrayList<>();
+        list2.add("a");
+        list2.add("b");
+        List<String> list3 = new ArrayList<>(list1);
+        List<String> list4 = new ArrayList<>(list2);
+        list3.removeAll(list2);
+        list4.removeAll(list1);
+        System.out.println(list3);
+        System.out.println(list4);
     }
 
     @Test
@@ -148,20 +156,26 @@ public class Task2Test {
 
     @Test
     public void test4() {
-        for (int i = 0; i < 10; i++) {
-            switch (i){
-                case Utils.STAFF_CODE:
-                    System.out.println("hehe");
-                    break;
-                case 1:
-                    System.out.println("haha");
-                    break;
-                default:
-                    System.out.println("xixi");
-                    break;
-            }
-            System.out.println(i);
-        }
+        List<User> list = new ArrayList<>();
+        User user = new User();
+        user.setId("1");
+        user.setCode("a");
+        User user2 = new User();
+        user2.setId("1");
+        user2.setCode("a");
+        list.add(user);
+        list.add(user2);
+
+        List<String> waSchemeAuthIds = new ArrayList<>();
+        // 过滤去重
+        list = list.stream().filter(
+                v -> {
+                    boolean flag = !waSchemeAuthIds.contains(v.getId());
+                    waSchemeAuthIds.add(v.getId());
+                    return flag;
+                }
+        ).collect(Collectors.toList());
+        System.out.println(list);
     }
 
     private Integer test77(Integer num){
@@ -193,6 +207,13 @@ public class Task2Test {
         list2.add("B");
         String join = StringUtils.join(list1, ",");
         System.out.println("薪资核算的定调薪档案中引用了此任职信息,JOB_ID:{0}".replace("{0}",join));
+        try {
+            int i = 1 / 0;
+        } catch (Exception e){
+            return;
+        }finally {
+            System.out.println(12);
+        }
     }
 
     private void traversalCategory(Category next, List<String> categoryIdList, Iterator<Category> iterator){

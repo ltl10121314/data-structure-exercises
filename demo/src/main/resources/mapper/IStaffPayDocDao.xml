@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.IStaffPayDocDao">
+
+    <select id="getPartTypeByJobIdStaffId" resultType="map">
+        select parttype as partType, parttype_name as partTypeName
+        from bd_staff_wa
+        where tenantid = #{tenantId}
+          and bd_staffb_id = #{staffId, jdbcType=VARCHAR}
+          and ss_staff_job_id = #{jobId, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

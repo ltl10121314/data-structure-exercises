@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.IWaPayslipMasterDao">
+
+    <select id="queryPayslipsDetailsByIds" resultType="com.example.demo.domain.WaPayslipmaster">
+        select
+        wm.id
+        ,wm.pk_waclass as pkWaclass
+        ,wm.cyear
+        ,wm.cperiod
+        ,wt.name as typeName
+        ,wd.amt_reality as amtReality
+        ,wd.amt_payable as amtPayable
+        ,wd.paydatas
+        ,wd.amt_deduct as amtDeduct
+        ,wd.amt_deduct_tax as amtDeductTax
+        ,wm.paydate
+        ,wm.paytitles
+        ,wm.paytitles2
+        ,wm.paytitles3
+        ,wm.paytitles4
+        ,wm.paytitles5
+        ,wm.paytitles6
+        ,wm.parent_paytitles as parentPaytitles
+        ,wm.payslip_web,wm.payslip_web2,wm.payslip_web3,wm.payslip_mobile,wm.payslip_mobile2,wm.payslip_mobile3,
+        wm.name_encode
+        ,wd.senddesc
+        ,wm.pk_org
+        ,wd.pk_payfile_doc as pkPayfileDoc
+        ,wd.over_flag as overFlag
+        ,wd.staffid
+        from wa_payslipdetail wd
+        inner join wa_payslipmaster wm on wd.pk_payslipmaster=wm.id and wd.dr=0 and wm.dr=0 and wd.ispay='Y' and
+        wm.tenantid = wd.tenantid
+        inner join wa_paysliptype wt on wm.pk_waclass=wt.id and wt.tenantid = wm.tenantid
+        where wm.tenantid = #{tenantId}
+        <if test="ids != null and ids.size > 0">
+            and wm.id in
+            <foreach collection="ids" item="id" index="index" separator="," open="(" close=")">
+                #{id}
+            </foreach>
+        </if>
+    </select>
+
+</mapper>

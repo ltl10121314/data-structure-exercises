@@ -5,11 +5,12 @@ import com.example.demo.domain.User;
 import com.example.demo.mapper.StudentDao;
 import com.example.demo.mapper.UserDao;
 import com.example.demo.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Liu Tianlong
@@ -20,10 +21,10 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserDao userDao;
 
-    @Autowired
+    @Resource
     private StudentDao studentDao;
 
     @Override
@@ -36,5 +37,10 @@ public class UserServiceImpl implements UserService {
     public Student insert(Student student) {
         studentDao.insert(student);
         return student;
+    }
+
+    @Override
+    public List<User> findById(Map<String, Object> condition) {
+        return userDao.findById(condition);
     }
 }

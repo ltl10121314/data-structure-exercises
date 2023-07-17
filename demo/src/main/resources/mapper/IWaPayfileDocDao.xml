@@ -7,7 +7,7 @@
         select STAFF_ID
         from wa_payfile_doc_${tenantId} payfiledoc
         where payfiledoc.tenantid = #{tenantId}
-        and payfiledoc.PK_WA_PAYFILE = #{waPayFileId}
+          and payfiledoc.PK_WA_PAYFILE = #{waPayFileId}
     </select>
 
 </mapper>

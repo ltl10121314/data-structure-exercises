@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Student  {
-    private static final long serialVersionUID = -91969758749726312L;
+//    private static final long serialVersionUID = -91969758749726312L;
     /**
      * 唯一标识id
      */

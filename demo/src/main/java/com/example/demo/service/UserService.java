@@ -2,8 +2,10 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Student;
 import com.example.demo.domain.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Liu Tianlong
@@ -25,4 +27,11 @@ public interface UserService {
      * @return
      */
     Student insert(Student student);
+
+    /**
+     * 批量查询用户
+     * @param condition
+     * @return
+     */
+    List<User> findById(Map<String, Object> condition);
 }

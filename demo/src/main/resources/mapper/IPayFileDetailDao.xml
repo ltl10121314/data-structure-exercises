@@ -3,20 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.IWaPayFileDetailDao">
-    <sql id="Base_Column_List">
-        PK_PAYFILE_DOC
-        ,PK_PAYFILE,STAFF_ID,
-        F_N_1,F_N_2,F_N_3,F_N_4,F_N_5,F_N_6,F_N_7,F_N_8,F_N_9,F_N_10,F_N_11,F_N_12,F_N_13,F_N_14,F_N_15,F_N_16,F_N_17,F_N_18,F_N_19,F_N_20,F_N_21,F_N_22,F_N_23,F_N_24,F_N_25,
-        F_N_26,F_N_27,F_N_28,F_N_29,F_N_30,F_N_31,F_N_32,F_N_33,F_N_34,F_N_35,F_N_36,F_N_37,F_N_38,F_N_39,F_N_40,F_N_41,F_N_42,F_N_43,F_N_44,F_N_45,F_N_46,F_N_47,F_N_48,F_N_49,F_N_50,
-        F_N_51,F_N_52,F_N_53,F_N_54,F_N_55,F_N_56,F_N_57,F_N_58,F_N_59,F_N_60,F_N_61,F_N_62,F_N_63,F_N_64,F_N_65,F_N_66,F_N_67,F_N_68,F_N_69,F_N_70,F_N_71,F_N_72,F_N_73,F_N_74,F_N_75,
-        F_N_76,F_N_77,F_N_78,F_N_79,F_N_80,F_N_81,F_N_82,F_N_83,F_N_84,F_N_85,F_N_86,F_N_87,F_N_88,F_N_89,F_N_90,F_N_91,F_N_92,F_N_93,F_N_94,F_N_95,F_N_96,F_N_97,F_N_98,F_N_99,F_N_100,F_N_200,
-        F_I_1,F_I_2,F_I_3,F_I_4,F_I_5,F_I_6,F_I_7,F_I_8,F_I_9,F_I_10,F_I_11,F_I_12,F_I_13,F_I_14,F_I_15,F_I_16,F_I_17,F_I_18,F_I_19,F_I_20,
-        F_I_21,F_I_22,F_I_23,F_I_24,F_I_25,F_I_26,F_I_27,F_I_28,F_I_29,F_I_30,
-        F_B_1,F_B_2,F_B_3,F_B_4,F_B_5,F_B_6,F_B_7,F_B_8,F_B_9,F_B_10,F_B_11,F_B_12,F_B_13,F_B_14,F_B_15,F_B_16,F_B_17,F_B_18,F_B_19,F_B_20,
-        F_V_1,F_V_2,F_V_3,F_V_4,F_V_5,F_V_6,F_V_7,F_V_8,F_V_9,F_V_10,F_V_11,F_V_12,F_V_13,F_V_14,F_V_15,F_V_16,F_V_17,F_V_18,F_V_19,F_V_20,
-        F_D_1,F_D_2,F_D_3,F_D_4,F_D_5,F_D_6,F_D_7,F_D_8,F_D_9,F_D_10,F_D_11,F_D_12,F_D_13,F_D_14,F_D_15,F_D_16,F_D_17,F_D_18,F_D_19,F_D_20,
-        CREATOR,CREATIONTIME,MODIFIER,MODIFIEDTIME,TS,DR,MEMO
-    </sql>
 
     <select id="queryItemValues" resultType="map">
         SELECT

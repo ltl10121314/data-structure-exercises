@@ -14,7 +14,7 @@
         <!-- 记得更改数据库端口和名称 -->
         <property name="url" value="${url}"/>
         <!-- 用户名和密码 -->
-        <property name="username" value="${user}"/>
+        <property name="username" value="${users}"/>
         <property name="password" value="${password}"/>
     </bean>
 

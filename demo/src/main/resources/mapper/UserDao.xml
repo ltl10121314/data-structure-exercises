@@ -14,5 +14,23 @@
         from user
     </select>
 
+    <select id="findById" resultType="com.example.demo.domain.User">
+        select *
+        from user
+        where id in
+        <foreach collection="condition.ids" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <select id="findUserById" resultType="com.example.demo.domain.User">
+        select *
+        from user
+        where id in
+        <foreach collection="condition.ids" item="item" index="index" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+    </select>
+
 
 </mapper>
