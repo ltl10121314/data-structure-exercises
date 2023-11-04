@@ -1,5 +1,7 @@
 package com.datastructureexercises.test;
 
+import com.alibaba.fastjson.JSONObject;
+import com.datastructureexercises.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -7,9 +9,12 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author liutianlong
@@ -19,40 +24,31 @@ public class TaskTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(TaskTest.class);
 
     public static void main(String[] args) {
-        boolean a = true;
-        double v1 = 0.1;
-        double v2 = 0.2;
-        double v3 = v1 + v2;
-        System.out.println(v3);
-        boolean notEmpty = StringUtils.isNotBlank(null + "");
-        System.out.println(notEmpty);
-        Object object1 = 123.0;
-        Object value = null;
-        // 格式化number String字符
-        DecimalFormat df = new DecimalFormat("0");
-        // 日期格式化
-        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
-        // 格式化数字
-        DecimalFormat df2 = new DecimalFormat("0");
-        Object object = 999;
-        if (ObjectUtils.isEmpty(object)) {
-            log.info("返回为空");
-            return;
+        String temp = "0000L0GCJTKI6JSSV00000-dataenc";
+        System.out.println("hashCode=" + temp.hashCode());
+        int hash = temp.hashCode();
+        System.out.println(hash);
+        String sss;
+        if (hash < 0) {
+            sss = (hash + "").replaceFirst("-", "");
+            System.out.println("-sss=" + sss);
+        } else {
+            sss = hash + "";
+            System.out.println("sss" + sss);
         }
-        if (!isDate(String.valueOf(object))) {
-            log.info("非日期格式");
-            return;
-        }
-        if(!DateUtil.isDate(String.valueOf(object))){
-            log.info("非日期格式2");
-            return;
-        }
+        Set<String> set = new HashSet<>();
+        set.add("a");
+        set.add("b");
+        set.add("c");
+        String join = StringUtils.join(set, ",").toUpperCase();
+        System.out.println(join);
 
-        if ((DateUtil.StringToDate(String.valueOf(object), DateStyle.YYYY_MM_DD) == null)) {
-            log.info("日期范围必须在{1753 年 1 月 1 日到 9999 年 12 月 31 日}之间");
-            return;
-        }
-
+        boolean b = new BigDecimal("0.0000000").compareTo(BigDecimal.ZERO) == 0;
+        System.out.println(b);
+        List<User> list = new ArrayList<>();
+        Map<String, String> stringMap = list.stream().collect(Collectors.toMap(User::getId, User::getCode));
+        String hah = stringMap.get("hah");
+        System.out.println(hah);
     }
 
     public static String cleanXSS(String value) {
@@ -79,4 +75,6 @@ public class TaskTest {
             return false;
         }
     }
+
+
 }

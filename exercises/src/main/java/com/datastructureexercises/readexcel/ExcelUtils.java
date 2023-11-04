@@ -1,5 +1,6 @@
 package com.datastructureexercises.readexcel;
 
+import com.datastructureexercises.test.DateStyle;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
@@ -8,6 +9,9 @@ import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Date;
+
+import static com.datastructureexercises.readexcel.ExcelUtil.getCellValue;
 
 /**
  * @author Liu Tianlong
@@ -38,16 +42,14 @@ public class ExcelUtils {
 
     @Test
     public void testRead() throws Exception {
-        FileInputStream finFileInputStream = new FileInputStream("/Users/liutianlong/Downloads/测试.xls");
-        HSSFWorkbook wookbook = new HSSFWorkbook(finFileInputStream);
-        //1、读取工作簿
-        HSSFSheet sheet = wookbook.getSheet("shermin");
-        //2、读取第"shermin"工作表
-        HSSFRow row = sheet.getRow(0);
-        HSSFCell cell = row.getCell(0);
-        //读取单元格；读取第0行第0列
-        System.out.println(cell.getStringCellValue());
-        wookbook.close();
+        FileInputStream finFileInputStream = new FileInputStream("/Users/liutianlong/Downloads/发薪人员初始化导入模板 (1).xls");
+        Workbook workbook = WorkbookFactory.create(finFileInputStream);
+        Sheet sheet = workbook.getSheet("发薪人员0");
+        Row row = sheet.getRow(1);
+        Cell cell = row.getCell(12);
+        Object value = getCellValue(cell);
+        System.out.println(value);
+        Date date = DateUtil.StringToDate(value.toString().trim(), DateStyle.YYYY_MM_DD);
         finFileInputStream.close();
     }
 
