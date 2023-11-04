@@ -60,6 +60,18 @@
         where id = #{id}
     </update>
 
+    <!--通过主键修改数据-->
+    <update id="batchUpdate">
+        <foreach collection="values" item="item" index="index">
+            update ${tableName}
+            <set>
+                age = 11
+            ,name = '哈哈'
+            </set>
+            where id = #{item.id};
+        </foreach>
+    </update>
+
     <!--通过主键删除-->
     <delete id="deleteById">
         delete

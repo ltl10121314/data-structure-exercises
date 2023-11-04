@@ -5,6 +5,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @Slf4j
-class DemoApplicationTests {
+class DemoApplicationTest {
 
 }

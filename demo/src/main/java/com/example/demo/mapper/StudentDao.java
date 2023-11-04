@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Liu Tianlong
@@ -27,7 +28,7 @@ public interface StudentDao {
      * 查询指定行数据
      *
      * @param offset 查询起始位置
-     * @param limit 查询条数
+     * @param limit  查询条数
      * @return 对象列表
      */
     List<Student> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
@@ -56,6 +57,8 @@ public interface StudentDao {
      * @return 影响行数
      */
     int update(Student student);
+
+    int batchUpdate(@Param("tableName") String tableName, @Param("values")List<Map<String, Object>> values);
 
     /**
      * 通过主键删除数据

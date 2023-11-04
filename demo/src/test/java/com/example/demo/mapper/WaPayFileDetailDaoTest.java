@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  */
 @SpringBootTest
 @Slf4j
-public class WaPayFileDetailDaoTests {
+public class WaPayFileDetailDaoTest {
 
     @Autowired
     private WaPayfileDocDao waPayfileDocDao;
@@ -56,4 +56,5 @@ public class WaPayFileDetailDaoTests {
         List<Map<String, Object>> maps = payFileDetailDao.queryItemValues(condPayfileDetail, tableName, columns);
         log.info(maps.toString());
     }
+
 }

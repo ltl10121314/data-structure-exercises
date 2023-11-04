@@ -1,11 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.User;
-import com.example.demo.mapper.StudentDao;
 import com.example.demo.mapper.UserDao;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -19,7 +17,7 @@ import java.util.*;
  */
 @SpringBootTest
 @Slf4j
-public class UserServiceTests {
+public class UserServiceTest {
 
     @Resource
     private UserService userService;
@@ -54,4 +52,12 @@ public class UserServiceTests {
         list.remove("haha");
         System.out.println(list);
     }
+
+    @Test
+    public void test2UserDao(){
+        List<User> all = userDao.findAll();
+        log.info(all.toString());
+
+    }
+
 }

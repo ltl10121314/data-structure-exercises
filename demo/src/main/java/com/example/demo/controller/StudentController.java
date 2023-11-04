@@ -35,4 +35,8 @@ public class StudentController {
         log.info("hello world");
         return this.studentService.queryById(id);
     }
+    @GetMapping("hello")
+    public String hello(){
+        return "hello";
+    }
 }
