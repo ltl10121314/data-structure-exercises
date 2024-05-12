@@ -141,11 +141,7 @@
 <!--            <version>1.7.2</version>-->
 <!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/com.jcraft.jsch/com.springsource.com.jcraft.jsch-->
-        <dependency>
-            <groupId>com.jcraft.jsch</groupId>
-            <artifactId>com.springsource.com.jcraft.jsch</artifactId>
-            <version>0.1.41</version>
-        </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
