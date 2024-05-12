@@ -1,4 +1,4 @@
-package com.datastructureexercises.readexcel;
+package com.datastructureexercises.excel;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -17,7 +17,7 @@ public class ExcelUtil {
     private ExcelUtil() {
     }
 
-    public static CellStyle getRowCell(Workbook wb, boolean isHead) {
+    public static CellStyle getRowCell(Workbook wb, String type) {
         CellStyle style = wb.createCellStyle();
         style.setAlignment(HorizontalAlignment.CENTER);
         style.setBorderBottom(BorderStyle.THIN);
@@ -31,21 +31,49 @@ public class ExcelUtil {
         style.setFillBackgroundColor(HSSFColor.HSSFColorPredefined.WHITE.getIndex());
         style.setAlignment(HorizontalAlignment.CENTER);
         style.setVerticalAlignment(VerticalAlignment.CENTER);
-
-        if (isHead) {
+        if ("common".equals(type)) {
+            Font font = wb.createFont();
+            font.setFontHeightInPoints((short) 10);
+            font.setFontName("SimSun");
+            style.setFont(font);
+            CreationHelper createHelper = wb.getCreationHelper();
+            style.setDataFormat(createHelper.createDataFormat().getFormat("Prefix_#"));
+        } else if ("head".equals(type)) {
             style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
             style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
             Font font = wb.createFont();
-            font.setFontHeightInPoints((short) 13);
-            font.setFontName("");
+            font.setFontHeightInPoints((short) 12);
+            font.setFontName("SimSun");
+            font.setBold(true);
             style.setFont(font);
-        } else {
+        } else if ("amount".equals(type)) {
             Font font = wb.createFont();
-            font.setFontHeightInPoints((short) 11);
-            font.setFontName("");
+            font.setFontHeightInPoints((short) 10);
+            font.setFontName("SimSun");
             style.setFont(font);
+            CreationHelper createHelper = wb.getCreationHelper();
+            String formats = ExcelUtil.formats("", "元", "#,##0", 3);
+            style.setDataFormat(createHelper.createDataFormat().getFormat(formats));
         }
         return style;
+    }
+
+    public static String formats(String prefix, String suffix, String integerFormats, int decimals) {
+        StringBuilder sb = new StringBuilder();
+        if (StringUtils.isNotEmpty(prefix)) {
+            sb.append(prefix.trim());
+        }
+        sb.append(integerFormats);
+        if (decimals > 0) {
+            sb.append(".");
+            for (int i = 0; i < decimals; i++) {
+                sb.append("0");
+            }
+        }
+        if (StringUtils.isNotEmpty(suffix)) {
+            sb.append(suffix.trim());
+        }
+        return sb.toString();
     }
 
     public static CellStyle getErrorRowCell(Workbook wb) {

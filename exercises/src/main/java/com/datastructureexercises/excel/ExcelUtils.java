@@ -1,17 +1,19 @@
-package com.datastructureexercises.readexcel;
+package com.datastructureexercises.excel;
 
 import com.datastructureexercises.test.DateStyle;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.math.BigDecimal;
 import java.util.Date;
 
-import static com.datastructureexercises.readexcel.ExcelUtil.getCellValue;
+import static com.datastructureexercises.excel.ExcelUtil.getCellValue;
 
 /**
  * @author Liu Tianlong
@@ -39,6 +41,11 @@ public class ExcelUtils {
         fileOutputStream.close();
     }
 
+    @Test
+    public void test2() {
+        String formats = ExcelUtil.formats("", "元", "#,##0", 2);
+        System.out.println(formats);
+    }
 
     @Test
     public void testRead() throws Exception {
@@ -75,37 +82,40 @@ public class ExcelUtils {
     @Test
     public void testStyle() throws Exception {
 
-        HSSFWorkbook workbook = new HSSFWorkbook();
-        HSSFSheet sheet = workbook.createSheet("shermin");
+        SXSSFWorkbook workbook = new SXSSFWorkbook(10000);
+        Sheet sheet = workbook.createSheet("银行报盘");
+        sheet.setDefaultColumnWidth(25);
+        // 表头
+        Row titleRowCode = sheet.createRow(0);
+//        titleRowCode.setZeroHeight(true);
+        Row titleRowName = sheet.createRow(1);
+        Row row1 = sheet.createRow(2);
 
-        // 创建合并单元格对象，合并0行0列到0行
-        //  cellRangeAddress = new CellRangeAddress(0, 0, 0, 1);
-        //  sheet.addMergedRegion(cellRangeAddress);
-        // 选择行
-        HSSFRow row = sheet.createRow(1);
-
-        CellStyle style = workbook.createCellStyle();
-        CellStyle styleDate = workbook.createCellStyle();
-        Font font = workbook.createFont();
-        Font fontDate = workbook.createFont();
-        HSSFDataFormat dataFormat = workbook.createDataFormat();
-        Drawing d = sheet.createDrawingPatriarch();
-        String comment = "错误信息";
-        // 选择列
-        for (int i = 0; i < 10; i++) {
-            HSSFCell cell = row.createCell(i);
-            CellStyle cellStyle;
-            if (i == 2) {
-                cellStyle = setErrorCellStyleDate(workbook, styleDate, fontDate, dataFormat, cell, d, comment);
-            } else {
-                cellStyle = setErrorCellStyle(workbook, style, font, dataFormat, cell, d, comment);
-            }
-            cell.setCellStyle(cellStyle);
-            cell.setCellValue("第" + i + "处错误");
+        CellStyle headStyle = ExcelUtil.getRowCell(workbook, "head");
+        CellStyle commonStyle = ExcelUtil.getRowCell(workbook, "common");
+        CellStyle amountCellStyle = ExcelUtil.getRowCell(workbook, "amount");
+        for (int i = 0; i < 5; i++) {
+            Cell cellCode = titleRowCode.createCell(i);
+            cellCode.setCellStyle(commonStyle);
+            cellCode.setCellValue("code" + i);
+            Cell cellName = titleRowName.createCell(i);
+            cellName.setCellStyle(headStyle);
+            cellName.setCellValue("表头" + i);
+            Cell cell_1 = row1.createCell(i);
+            cell_1.setCellStyle(amountCellStyle);
+            BigDecimal decimal = new BigDecimal("20.8900").setScale(2);
+            double a = Double.parseDouble(decimal.toString());
+            cell_1.setCellValue(a);
         }
-        //样式加到单元格中
+//        sheet.setColumnHidden(1,true);
+        //默认行高
+//         sheet.setDefaultRowHeightInPoints(30);
+        // 创建合并单元格对象，合并0行0列到0行
+//        CellRangeAddress cellAddresses = new CellRangeAddress(3, 4, 3, 5);
+//        sheet.addMergedRegion(cellAddresses);
         FileOutputStream fileOutputStream = new FileOutputStream("/Users/liutianlong/Downloads/测试.xls");
         workbook.write(fileOutputStream);
+        workbook.dispose();
         workbook.close();
         fileOutputStream.close();
     }
@@ -174,6 +184,37 @@ public class ExcelUtils {
         c.setString(textString);
         c.setVisible(false);
         cell.setCellComment(c);
+        return style;
+    }
+
+    public static CellStyle getRowCell(Workbook wb, boolean isHead) {
+        CellStyle style = wb.createCellStyle();
+        style.setAlignment(HorizontalAlignment.CENTER);
+        style.setBorderBottom(BorderStyle.THIN);
+        style.setBottomBorderColor(HSSFColor.HSSFColorPredefined.BLACK.getIndex());
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setLeftBorderColor(HSSFColor.HSSFColorPredefined.BLACK.getIndex());
+        style.setBorderRight(BorderStyle.THIN);
+        style.setRightBorderColor(HSSFColor.HSSFColorPredefined.BLACK.getIndex());
+        style.setBorderTop(BorderStyle.THIN);
+        style.setTopBorderColor(HSSFColor.HSSFColorPredefined.BLACK.getIndex());
+        style.setFillBackgroundColor(HSSFColor.HSSFColorPredefined.WHITE.getIndex());
+        style.setAlignment(HorizontalAlignment.CENTER);// 水平方向的对齐方式
+        style.setVerticalAlignment(VerticalAlignment.CENTER);//垂直方向的对齐方式
+
+        if (isHead) {
+            style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());// 设置背景色
+            style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+            Font font = wb.createFont();
+            font.setFontHeightInPoints((short) 13); // 字体高度
+            font.setFontName("SimSun");
+            style.setFont(font);
+        } else {
+            Font font = wb.createFont();
+            font.setFontHeightInPoints((short) 11); // 字体高度
+            font.setFontName("SimSun");
+            style.setFont(font);
+        }
         return style;
     }
 }

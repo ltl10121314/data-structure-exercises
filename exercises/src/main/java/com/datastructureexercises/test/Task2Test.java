@@ -1,21 +1,19 @@
 package com.datastructureexercises.test;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.datastructureexercises.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
+import org.springframework.lang.NonNull;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -29,17 +27,31 @@ public class Task2Test {
 
     public static ThreadLocal<String> isExistDynamicAuthToken = new ThreadLocal<>();
 
-
+    /**
+     * @param args
+     * @throws InterruptedException
+     */
     public static void main(String[] args) throws InterruptedException {
         try{
+            System.out.println();
             SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm:ss");
             String time = formatterTime.format("99999");
         }catch (Exception e) {
 
             System.out.println("aa");
         }
-        Map<String, String> map = new HashMap<>();
-        Set<String> strings = map.keySet();
+        Map<String, Object> map = new HashMap<>();
+        Optional<Map<String, Object>> objectMap = Optional.of(map);
+        Optional<Object> empty = Optional.empty();
+        Optional<String> name = Optional.ofNullable(getNane());
+        log.info("--------");
+        System.out.println(name);
+        log.info("--------");
+
+    }
+
+    public static String getNane(){
+        return "hello";
     }
 
     private static void testListSort() throws InterruptedException {
@@ -72,7 +84,7 @@ public class Task2Test {
         log.info(Thread.currentThread().getStackTrace()[1].getMethodName());
     }
 
-    public static boolean isNeedParser(String formulastr) {
+    public static boolean isNeedParser(@NonNull String formulastr) {
         Pattern numberPattern = compile("[0-9]*");
         boolean isneed = false;
         if (formulastr==null) {
@@ -140,18 +152,17 @@ public class Task2Test {
     }
     @Test
     public void test3() {
-        List<User> list = new ArrayList<>();
-        List<User> list2 = new ArrayList<>();
-//        list.add(new User("a", "2", "京"));
-//        list.add(new User("a", "3", "沪"));
-//        list.add(new User("a", "4", "辽"));
-//        list.add(new User("b", "5", "黑"));
-//        list.add(new User("b", "6", "蒙"));
-//        list.add(new User("b", "7", "陕"));
-//        list2.add(new User("b", "7", "陕"));
-        HashMap<Object, Object> map = new HashMap<>();
-        Object heh = map.get("heh");
-        System.out.println(heh);
+        String input = "9999-14"; // 输入的字符串
+        String patternStr = "\\d{4}[-/]\\d{2}"; // 正则表达式
+        Pattern pattern = Pattern.compile(patternStr);
+        Matcher matcher = pattern.matcher(input);
+
+        if (matcher.matches()) {
+            System.out.println("匹配成功");
+            // 可以在这里进行进一步的处理，例如提取年份和月份
+        } else {
+            System.out.println("匹配失败");
+        }
     }
 
     @Test
@@ -185,16 +196,19 @@ public class Task2Test {
 
     @Test
     public void test5() {
-        List<Category> list = creatList();
-        List<Category> itemCategoryList = dealCategoryNode(list);
-        List<String> categoryIdList = new ArrayList<>();
-        categoryIdList.add("112");
-        categoryIdList.add("212");
-        Iterator<Category> iterator = itemCategoryList.iterator();
-        while (iterator.hasNext()){
-            Category next = iterator.next();
+        String dateString = "2021-11";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+        Date date = null;
+        try {
+            date = formatter.parse(dateString);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
         }
-        log.info(itemCategoryList.toString());
+        System.out.println(date);
+        List<String> list = Collections.emptyList();
+        for (String s : list) {
+            System.out.println(123);
+        }
     }
 
     @Test

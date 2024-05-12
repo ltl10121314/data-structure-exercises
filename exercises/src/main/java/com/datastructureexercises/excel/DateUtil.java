@@ -1,4 +1,4 @@
-package com.datastructureexercises.readexcel;
+package com.datastructureexercises.excel;
 
 import com.datastructureexercises.test.DateStyle;
 import org.apache.commons.lang3.StringUtils;

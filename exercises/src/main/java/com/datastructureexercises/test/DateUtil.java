@@ -865,16 +865,12 @@ public class DateUtil {
 		List<String> list = null;
 		try {
 			list = new ArrayList<String>();
-
 			String firstDay = "";
 			Date date = new SimpleDateFormat("yyyy-MM").parse(month);// 定义起始日期
-
 			Date now = new Date();
-
 			if (date.after(now)) {
 				date = now;
 			}
-
 			List<String> mlist = getYearMonthBetweenDate(DateToString(date, "yyyy-MM"), DateToString(now, "yyyy-MM"));
 
 			if (mlist.size() <= offset) {

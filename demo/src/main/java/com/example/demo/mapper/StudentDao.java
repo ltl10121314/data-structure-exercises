@@ -66,7 +66,7 @@ public interface StudentDao {
      * @param id 主键
      * @return 影响行数
      */
-    int deleteById(String id);
+    Integer deleteById(String id);
 
 }
 

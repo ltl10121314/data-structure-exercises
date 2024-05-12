@@ -77,6 +77,8 @@ public class DateOverlap {
 
     @Test
     public void test1(){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String downLoadDate = simpleDateFormat.format(System.currentTimeMillis());
+        System.out.println(downLoadDate);
     }
 }
