@@ -1,17 +1,17 @@
 package com.example.demo.mapper;
 
 import com.example.demo.domain.Student;
+import com.example.demo.domain.User;
+import com.example.demo.model.StudentParamVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author Liu Tianlong
- * @program data-structure-exercises
- * @create 2023-03-02 23:01
- * @description 学生接口
  */
 @Mapper
 public interface StudentDao {
@@ -43,6 +43,14 @@ public interface StudentDao {
     List<Student> queryAll(Student student);
 
     /**
+     * 根据条件查询
+     *
+     * @param param 入参
+     * @return 返回
+     */
+    List<Student> queryStudentByCondition(@Param("param") StudentParamVO param);
+
+    /**
      * 新增数据
      *
      * @param student 实例对象
@@ -58,7 +66,14 @@ public interface StudentDao {
      */
     int update(Student student);
 
-    int batchUpdate(@Param("tableName") String tableName, @Param("values")List<Map<String, Object>> values);
+    /**
+     * 批量更新
+     *
+     * @param tableName 表名
+     * @param values    值
+     * @return 返回
+     */
+    int batchUpdate(@Param("tableName") String tableName, @Param("values") List<Map<String, Object>> values);
 
     /**
      * 通过主键删除数据
@@ -67,6 +82,9 @@ public interface StudentDao {
      * @return 影响行数
      */
     Integer deleteById(String id);
+
+    @Select("select * from `student`")
+    List<Student> findAll();
 
 }
 

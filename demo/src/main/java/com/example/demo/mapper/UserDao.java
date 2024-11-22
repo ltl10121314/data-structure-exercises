@@ -20,7 +20,7 @@ public interface UserDao {
      *
      * @return 返回用户实体
      */
-    @Select("select * from user")
+    @Select("select * from `user`")
     List<User> findAll();
 
     /**
@@ -41,8 +41,9 @@ public interface UserDao {
 
     /**
      * 根据ID查询用户
-     * @param condition
-     * @return
+     *
+     * @param condition 条件
+     * @return 返回
      */
     User findUserById(@Param("condition") Map<String, Object> condition);
 }

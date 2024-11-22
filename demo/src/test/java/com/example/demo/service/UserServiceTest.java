@@ -10,10 +10,7 @@ import javax.annotation.Resource;
 import java.util.*;
 
 /**
- * @author Liu Tianlong
- * @program data-structure-exercises
- * @create 2023-05-14 23:51
- * @description 用户测试
+ * @author liutianlong
  */
 @SpringBootTest
 @Slf4j
@@ -28,36 +25,31 @@ public class UserServiceTest {
     @Test
     public void testUserService() {
         List<User> all = userService.findAll();
-        log.info(all.toString());
-        log.info("============");
+        log.error("user:{}", all);
         Map<String, Object> map = new HashMap<>();
         Map<String, String> mapTmp = new HashMap<>();
         mapTmp.put("1", "a");
         mapTmp.put("2", "b");
         map.put("ids", mapTmp.keySet());
         List<User> byId = userService.findById(map);
-        log.info(byId.toString());
+        log.error("user:{}", byId);
     }
 
     @Test
-    public void testUserDao(){
+    public void testUserDao() {
         Map<String, Object> map = new HashMap<>();
         Map<String, String> mapTmp = new HashMap<>();
         mapTmp.put("0", "a");
         map.put("ids", mapTmp.keySet());
         User userById = userDao.findUserById(map);
-        System.out.println(userById);
-
+        log.error("userById:{}", userById);
         List<String> list = new ArrayList<>();
-        list.remove("haha");
-        System.out.println(list);
+        log.error("list:{}", list);
     }
 
     @Test
-    public void test2UserDao(){
+    public void test2UserDao() {
         List<User> all = userDao.findAll();
-        log.info(all.toString());
-
+        log.error(all.toString());
     }
-
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Student;
+import com.example.demo.model.StudentParamVO;
 
 import java.util.List;
 
@@ -59,5 +60,7 @@ public interface StudentService {
      * @param student
      */
     void updateAndInsert(Student student);
+
+    List<Student> queryStudentByCondition(StudentParamVO paramVO);
 
 }

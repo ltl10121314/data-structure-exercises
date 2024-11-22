@@ -1,19 +1,25 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Student;
+import com.example.demo.domain.User;
 import com.example.demo.mapper.StudentDao;
+import com.example.demo.model.StudentParamVO;
+import com.example.demo.utils.RedisUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 /**
- * @author Liu Tianlong
- * @program data-structure-exercises
- * @create 2023-05-14 23:50
- * @description 学生测试
+ * @author liutianlong
  */
 @SpringBootTest
 @Slf4j
@@ -25,20 +31,67 @@ public class StudentServiceTest {
     @Resource
     private StudentDao studentDao;
 
+    @Value("${databaseSchema:mysql}")
+    private String databaseSchema;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @Autowired
+    private RedisUtils redisUtils;
+
     @Test
-    public void testStudentService() {
+    public void test5(){
+        Map<String, String> map = new HashMap<>();
+        List<User> users = new ArrayList<>();
+        Map<String, String> authName = users.stream().collect(Collectors.toMap(User::getId, User::getName, (v1, v2) -> v1));
+        Set<String> schemeIds = new HashSet<>(authName.values());
+        System.out.println(CollectionUtils.isEmpty(schemeIds));
+        Student student = new Student();
+
+    }
+
+    @Test
+    public void test4() {
+        StudentParamVO param = new StudentParamVO();
+        List<Student> allStudent = studentDao.findAll();
+        log.error("allStudent:{}", allStudent);
+        List<String> ids = allStudent.stream().map(Student::getId).collect(Collectors.toList());
+        param.setIds(ids);
+        log.error("入参:{}", param);
+        List<Student> studentList = studentDao.queryStudentByCondition(param);
+        log.error(studentList.toString());
+        redisUtils.set("param", "爱小博");
+        String value2 = redisUtils.getValue("param");
+//        StudentParamVO value2 = redisUtils.getValue("param");
+        log.error("logInfo:{}", value2);
+    }
+
+    @Test
+    public void test3() {
         Student student = new Student();
         student.setId("1");
         student.setAge(23);
         student.setName("李四");
-//        studentService.updateAndInsert(student);
-//        studentService.queryById("1");
+        int update = studentDao.update(student);
+        log.error("更新个数:{}", update);
+    }
+
+    @Test
+    public void test2() {
+        Student student = new Student();
+        student.setId("1");
+        student.setAge(23);
+        student.setName("李四");
+        studentService.updateAndInsert(student);
+        Student student1 = studentService.queryById("1");
+        log.info(student1.toString());
         List<Map<String, Object>> list = new ArrayList<>();
         Map<String, Object> map1 = new HashMap<>();
-        map1.put("id", "1");
+        map1.put("id", "11");
         map1.put("age", 11);
         Map<String, Object> map2 = new HashMap<>();
-        map2.put("id", "2");
+        map2.put("id", "12");
         map2.put("age", 11);
         list.add(map1);
         list.add(map2);
@@ -46,8 +99,8 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void testStudentService2() {
-        String id = UUID.randomUUID().toString().replace("-","");
+    public void test1() {
+        String id = UUID.randomUUID().toString().replace("-", "");
         Student student = new Student();
         student.setId(id);
         student.setAge(23);
@@ -61,8 +114,10 @@ public class StudentServiceTest {
     }
 
     @Test
-    public void insertData(){
+    public void insertData() {
         for (int i = 0; i < 10; i++) {
+            Integer delete = studentDao.deleteById(String.valueOf(i));
+            log.error("delete size:{}", delete);
             Student student = new Student();
             student.setId(String.valueOf(i));
             // 创建Random类的实例
@@ -70,9 +125,29 @@ public class StudentServiceTest {
             // 生成一个从0（包括）到10（不包括）的随机整数
             int age = random.nextInt(30);
             student.setAge(age);
-            student.setName("张三"+i);
+            student.setName("张三" + i);
             int insert = studentDao.insert(student);
-            log.info(String.valueOf(insert));
+            log.error("insert size:{}", insert);
+        }
+    }
+
+    @Test
+    public void queryDataByThread() {
+        List<CompletableFuture> cfList = new ArrayList<>();
+        Vector<Student> students = new Vector<>();
+        for (int i = 0; i < 10; i++) {
+//            String finalI = String.valueOf(i);
+            CompletableFuture cf = CompletableFuture.runAsync(() -> {
+//                Student student = studentDao.queryById(finalI);
+                List<Student> studentList = studentDao.queryAllByLimit(0, 10);
+//                students.add(student);
+                students.addAll(studentList);
+            });
+            cfList.add(cf);
+        }
+        CompletableFuture.allOf(cfList.toArray(new CompletableFuture[0])).join();
+        for (Student student : students) {
+            log.info(student.toString());
         }
     }
 }

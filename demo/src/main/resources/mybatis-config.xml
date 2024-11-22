@@ -1,0 +1,6 @@
+<configuration>
+<!--    <settings>-->
+<!--        &lt;!&ndash; 设置使用 Log4j2 作为日志工具 &ndash;&gt;-->
+<!--        <setting name="logImpl" value="LOG4J2"/>-->
+<!--    </settings>-->
+</configuration>

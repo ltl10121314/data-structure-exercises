@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.example.demo.domain.Student;
 import com.example.demo.mapper.StudentDao;
+import com.example.demo.model.StudentParamVO;
 import com.example.demo.service.StudentService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +61,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Student insert(Student student) {
-        studentDao.update(student);
         studentDao.insert(student);
+        studentDao.update(student);
         return student;
     }
 
@@ -75,23 +76,17 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(rollbackFor = Exception.class)
     public Student update(Student student) {
         studentDao.update(student);
-//        if (student.getId() != null) {
-//            throw new RuntimeException("无语");
-//        }
         return queryById(student.getId());
     }
 
     @Transactional(rollbackFor = Exception.class)
     public Student updateStudent(Student student) {
-//        Student student3 = new Student();
-//        student3.setId("3");
-//        student3.setAge(44);
-//        student3.setName("李四");
+        Student student3 = new Student();
+        student3.setId("3");
+        student3.setAge(44);
+        student3.setName("李四");
 //        userService.insert(student3);
-//        if (student.getId() != null) {
-//            throw new RuntimeException("无语");
-//        }
-//        studentService.insert(student3);
+        studentService.insert(student3);
         return queryById(student.getId());
     }
 
@@ -107,19 +102,24 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-//    @Transactional(rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     public void updateAndInsert(Student student) {
         Student student1 = new Student();
-        student1.setId("1");
+        student1.setId("11");
         student1.setAge(77);
         student1.setName("第一邪皇");
         Student student2 = new Student();
-        student2.setId("2");
+        student2.setId("12");
         student2.setAge(88);
         student2.setName("第二刀皇");
-//        studentService.update(student2);
+        studentService.update(student2);
         this.updateStudent(student2);
-//        studentService.insert(student1);
+        studentService.insert(student1);
+    }
+
+    @Override
+    public List<Student> queryStudentByCondition(StudentParamVO paramVO) {
+        return studentDao.queryStudentByCondition(paramVO);
     }
 
 }

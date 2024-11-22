@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.datastructureexercises.dao.UserDao">
+<mapper namespace="com.exercises.dao.UserDao">
 
-    <select id="findAll" resultType="com.datastructureexercises.domain.User">
+    <select id="findAll" resultType="com.exercises.domain.User">
         select * from user
     </select>
 
