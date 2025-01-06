@@ -1,12 +1,11 @@
 package com.exercises.thread;
 
+import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -19,12 +18,52 @@ import java.util.concurrent.*;
 public class ThreadTest2 {
 
     public static final ThreadFactory THREAD_FACTORY = new ThreadFactoryBuilder().setNameFormat("demo-pool-%d").build();
-    public static final ExecutorService THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(6, 20, 60,
+    public static final ExecutorService THREAD_POOL_EXECUTOR = new ThreadPoolExecutor(1, 20, 60L,
             TimeUnit.SECONDS,
-            new LinkedBlockingQueue<>(10000),
-            THREAD_FACTORY,
-            new ThreadPoolExecutor.CallerRunsPolicy()
+            new ArrayBlockingQueue<>(1000),
+            THREAD_FACTORY
+//            ,new ThreadPoolExecutor.CallerRunsPolicy()
     );
+
+    @Test
+    public void test3() {
+        Set<String> staffIds = new HashSet<>();
+        for (int i = 0; i < 10000; i++) {
+            staffIds.add(i + "");
+        }
+        Set<String> payFileIds = new HashSet<>();
+        for (int i = 0; i < 1000; i++) {
+            payFileIds.add(i + "");
+        }
+        // 筛选符合逻辑的数据
+        List<CompletableFuture> cfList = new ArrayList<>();
+        for (String id : payFileIds) {
+            log.error("mainThread-{}", id);
+            CompletableFuture cf = CompletableFuture.runAsync(() -> {
+                this.testThread1(new ArrayList<>(staffIds));
+            }, THREAD_POOL_EXECUTOR);
+            cfList.add(cf);
+        }
+        CompletableFuture.allOf(cfList.toArray(new CompletableFuture[0])).join();
+    }
+
+    public void testThread1(List<String> idList) {
+        List<List<String>> partitions = Lists.partition(idList, 1000);
+        List<CompletableFuture<List<Map<String, Object>>>> cfList = new ArrayList<>();
+        for (List<String> staffIdList : partitions) {
+            log.error("subThread-{}", staffIdList);
+            CompletableFuture<List<Map<String, Object>>> cf = CompletableFuture.supplyAsync(() -> {
+                try {
+                    Thread.sleep(1000 * 10);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                return new ArrayList<>();
+            }, THREAD_POOL_EXECUTOR);
+            cfList.add(cf);
+        }
+        CompletableFuture.allOf(cfList.toArray(new CompletableFuture[0])).join();
+    }
 
     @Test
     public void test2() {

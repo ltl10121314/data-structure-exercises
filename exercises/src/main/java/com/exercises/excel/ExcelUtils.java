@@ -1,6 +1,6 @@
 package com.exercises.excel;
 
-import com.exercises.test.DateStyle;
+import com.exercises.date.DateStyle;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;

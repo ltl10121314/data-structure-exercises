@@ -63,4 +63,10 @@ public interface StudentService {
 
     List<Student> queryStudentByCondition(StudentParamVO paramVO);
 
+    void task();
+
+    void task1();
+
+    void task2();
+
 }

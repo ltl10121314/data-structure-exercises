@@ -1,4 +1,4 @@
-package com.exercises.test;
+package com.exercises.date;
 
 public enum DateStyle {
     YYYY("yyyy", false),

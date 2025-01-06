@@ -7,10 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author Liu Tianlong
- * @program data-structure-exercises
- * @create 2023-07-23 13:26
- * @description 日期交叉
+ * @author liutianlong
+ * 日期交叉
  */
 public class DateOverlap {
 
@@ -76,7 +74,7 @@ public class DateOverlap {
     }
 
     @Test
-    public void test1(){
+    public void test1() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String downLoadDate = simpleDateFormat.format(System.currentTimeMillis());
         System.out.println(downLoadDate);

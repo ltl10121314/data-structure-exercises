@@ -7,6 +7,7 @@ import com.example.demo.service.StudentService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -122,4 +123,48 @@ public class StudentServiceImpl implements StudentService {
         return studentDao.queryStudentByCondition(paramVO);
     }
 
+    @Override
+    @Transactional
+    public void task() {
+        studentDao.deleteAll();
+        this.task1();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void task1() {
+        Student student = new Student();
+        student.setId("1");
+        student.setAge(1);
+        student.setName("第一邪皇");
+        studentDao.insert(student);
+        studentService.task2();
+    }
+
+    @Transactional(rollbackFor = Exception.class, propagation = Propagation.NOT_SUPPORTED)
+    public void task2() {
+        Student student = new Student();
+        student.setId("2");
+        student.setAge(2);
+        student.setName("第二邪皇");
+        studentDao.insert(student);
+        task3();
+        this.task4();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    private void task3() {
+        Student student = new Student();
+        student.setId("3");
+        student.setAge(3);
+        student.setName("第三邪皇");
+        studentDao.insert(student);
+    }
+
+    private void task4() {
+        try {
+            int i = 1 / 0;
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

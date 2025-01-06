@@ -41,6 +41,11 @@ public class StudentServiceTest {
     private RedisUtils redisUtils;
 
     @Test
+    public void test6(){
+        studentService.task();
+    }
+
+    @Test
     public void test5(){
         Map<String, String> map = new HashMap<>();
         List<User> users = new ArrayList<>();
@@ -48,7 +53,6 @@ public class StudentServiceTest {
         Set<String> schemeIds = new HashSet<>(authName.values());
         System.out.println(CollectionUtils.isEmpty(schemeIds));
         Student student = new Student();
-
     }
 
     @Test

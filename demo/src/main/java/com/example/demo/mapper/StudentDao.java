@@ -86,5 +86,7 @@ public interface StudentDao {
     @Select("select * from `student`")
     List<Student> findAll();
 
+    void deleteAll();
+
 }
 

@@ -109,5 +109,9 @@
         where id = #{id}
     </delete>
 
+    <delete id="deleteAll">
+        truncate table student
+    </delete>
+
 </mapper>
 

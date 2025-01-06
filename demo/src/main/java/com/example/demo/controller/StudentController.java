@@ -41,4 +41,9 @@ public class StudentController {
     public String hello() {
         return "hello";
     }
+
+    @GetMapping("task")
+    public void task() {
+        studentService.task();
+    }
 }

@@ -1,4 +1,4 @@
-package com.exercises.test;
+package com.exercises.date;
 
 import lombok.extern.slf4j.Slf4j;
 

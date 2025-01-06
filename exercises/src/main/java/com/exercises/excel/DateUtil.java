@@ -1,6 +1,6 @@
 package com.exercises.excel;
 
-import com.exercises.test.DateStyle;
+import com.exercises.date.DateStyle;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
