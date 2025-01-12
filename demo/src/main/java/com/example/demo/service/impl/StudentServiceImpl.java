@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.domain.Student;
+import com.example.demo.log.MyLog;
 import com.example.demo.mapper.StudentDao;
 import com.example.demo.model.StudentParamVO;
 import com.example.demo.service.StudentService;
@@ -37,6 +38,7 @@ public class StudentServiceImpl implements StudentService {
      * @return 实例对象
      */
     @Override
+    @MyLog
     public Student queryById(String id) {
         return studentDao.queryById(id);
     }

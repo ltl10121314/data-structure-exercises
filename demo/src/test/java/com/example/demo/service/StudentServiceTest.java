@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Student;
 import com.example.demo.domain.User;
+import com.example.demo.log.MyLog;
 import com.example.demo.mapper.StudentDao;
 import com.example.demo.model.StudentParamVO;
 import com.example.demo.utils.RedisUtils;
@@ -153,5 +154,11 @@ public class StudentServiceTest {
         for (Student student : students) {
             log.info(student.toString());
         }
+    }
+
+    @Test
+    @MyLog
+    public void task(){
+        log.error("------------");
     }
 }
