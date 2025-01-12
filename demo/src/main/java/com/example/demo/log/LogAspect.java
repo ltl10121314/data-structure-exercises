@@ -3,11 +3,15 @@ package com.example.demo.log;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -39,6 +43,17 @@ public class LogAspect {
         //记录操作日志
         log.error("操作时间:{} 操作类名:{} 操作方法名:{}  操作方法参数:{}  方法返回值:{}  操作耗时{}", operateTime, className, methodName, methodParams, returnValue, costTime);
         return result;
+    }
+
+    @AfterReturning(
+            value = "@annotation(com.example.demo.log.MyLog)",
+            returning = "returnValue"
+    )
+    public void returnValuePointcut(JoinPoint joinPoint, final Object returnValue) {
+        MethodSignature signature = (MethodSignature)joinPoint.getSignature();
+        Method method = signature.getMethod();
+        log.error(method.getName());
+        log.error(returnValue.toString());
     }
 }
 
