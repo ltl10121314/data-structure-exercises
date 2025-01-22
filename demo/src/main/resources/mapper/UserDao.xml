@@ -15,7 +15,11 @@
     <!--    </select>-->
 
     <select id="findById" resultType="com.example.demo.domain.User">
-        select *
+        select
+        <if test="true">
+        id, code,
+        </if>
+        name, age
         from user
         where id in
         <foreach collection="condition.ids" item="item" index="index" separator="," open="(" close=")">

@@ -3,6 +3,7 @@ package com.exercises.test;
 import com.exercises.domain.User;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author liutianlong
@@ -61,38 +61,50 @@ public class TaskTest {
     }
 
     public static void main(String[] args) {
-        List<Map<String, Object>> list = new ArrayList<>();
-        Map<String, Object> map1 = new HashMap<>();
-        map1.put("order",null);
-        map1.put("code",1);
-        list.add(map1);
-        Map<String, Object> map2 = new HashMap<>();
-        map2.put("order",12);
-        map2.put("code",2);
-        list.add(map2);
-        Map<String, Object> map3 = new HashMap<>();
-        map3.put("order",1);
-        map3.put("code",3);
-        list.add(map3);
-        List<Map<String, Object>> collect = list.stream().sorted(Comparator.nullsFirst(Comparator.comparing(item -> item.get("order") == null ? 0 : Integer.parseInt(item.get("order").toString())))).collect(Collectors.toList());
-        System.out.println(collect);
-        String aa = null;
-        String s = aa + "";
-        System.out.println(s);
+        long a =1732982400000L;
+        String dateStr = new SimpleDateFormat("yyyy-MM").format(new Date((Long) a));
+        System.out.println(dateStr);
 
+        String time = "2024-09-09";
+        System.out.println(time.substring(0,7)+"-01");
+        String aa = "";
+        System.out.println(aa instanceof String);
+        String[] columns = new String[]{"a","b"};
+        for (String column : columns) {
+            System.out.println(column);
+        }
+        Set<String> tableNames = new HashSet<>();
+        tableNames.add("aa");
+        tableNames.add("bb");
+        dealProduceJoinTableByTableNames(tableNames, "cc", "c");
+    }
+
+    public static String dealProduceJoinTableByTableNames(Set<String> tableNames,String mulDbTableName,String aliasDetail) {
+        StringBuffer joinTable = new StringBuffer();
+        int tableNum =1;
+        if(CollectionUtils.isEmpty(tableNames)){
+            tableNames.add(mulDbTableName);
+        }
+        for(String tableName:tableNames){
+            if(tableNum==1){
+                joinTable.append(" "+tableName+" "+aliasDetail);
+            }else{
+                String aliasOther = aliasDetail+tableNum;
+                joinTable.append(" left join").append(" "+tableName).append(" "+aliasOther).append(" ON ").append(aliasDetail+".").append("ID = ").append(aliasOther+".").append("ID");
+            }
+            tableNum++;
+        }
+        log.error("dealProduceJoinOnlyDetailTable  sql=====\n"+joinTable.toString());
+        return joinTable.toString();
     }
 
     @Test
     public void test1() {
-        String itemCode = "";
-        String adjustValue = "";
-        try{
-            itemCode = "xixi";
-            adjustValue = "hehe";
-            int i = 1 / 0;
-        }catch (Exception e){
-            log.error("decodeNumMapData mapKey[{}] value[{}] error.", itemCode, adjustValue, e);
-        }
+        BigDecimal v1 = new BigDecimal("1");
+        BigDecimal v2 = new BigDecimal(v1.toString());
+        v1 = v1.subtract(new BigDecimal("1"));
+        System.out.println(v1);
+        System.out.println(v2);
     }
 
     private void calculateDayValue(Map<String, BigDecimal> map, BigDecimal upperLimit, BigDecimal notOnDuty, boolean flag) {

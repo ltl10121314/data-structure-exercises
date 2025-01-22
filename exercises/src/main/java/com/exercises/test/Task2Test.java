@@ -29,7 +29,8 @@ public class Task2Test {
 
     public static void main(String[] args) throws InterruptedException {
 //        String temp = "nmme2n2z-dataenc"; // 三峡
-        String temp = "0000M03FWZ035BYADG0000-dataenc"; // 测试:20240821超级人力测试
+//        String temp = "0000M03FWZ035BYADG0000-dataenc"; // 测试:20240821超级人力测试
+        String temp = "j80zc0cv-dataenc"; // new20:240322薪酬计算
         System.out.println("hashCode=" + temp.hashCode());
         int hash = temp.hashCode();
         String sss;
@@ -161,14 +162,14 @@ public class Task2Test {
     @Test
     public void test4() {
         List<User> list = new ArrayList<>();
-        User user = new User();
-        user.setId("1");
-        user.setCode("a");
-        User user2 = new User();
-        user2.setId("1");
-        user2.setCode("a");
-        list.add(user);
-        list.add(user2);
+//        User user = new User();
+//        user.setId("1");
+//        user.setCode("a");
+//        User user2 = new User();
+//        user2.setId("1");
+//        user2.setCode("a");
+//        list.add(user);
+//        list.add(user2);
 
         List<String> waSchemeAuthIds = new ArrayList<>();
         // 过滤去重
@@ -179,6 +180,7 @@ public class Task2Test {
                     return flag;
                 }
         ).collect(Collectors.toList());
+        list = list.stream().sorted(Comparator.comparing(User::getOrderId)).collect(Collectors.toList());
         System.out.println(list);
     }
 
@@ -189,20 +191,32 @@ public class Task2Test {
 
     @Test
     public void test5() {
-        String dateString = "2021-11";
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
-        Date date = null;
+        List<Map<String, Object>> details = new ArrayList<>();
+        Map<String, Object> map1 = new HashMap<>();
+        Map<String, Object> map2 = new HashMap<>();
+        String dateStr1 = "2021-11-01";
+        String dateStr2 = "2021-11-02";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = null;
+        Date date2 = null;
         try {
-            date = formatter.parse(dateString);
+            date1 = formatter.parse(dateStr1);
+            log.error(date1.toString());
+            map1.put("payDate", date1);
+            date2 = formatter.parse(dateStr2);
+            log.error(date2.toString());
+            map2.put("payDate", date2);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(date);
-        List<String> list = Collections.emptyList();
-        for (String s : list) {
-            System.out.println(123);
-        }
+        details.add(map1);
+        details.add(map2);
+        details.sort(Comparator.comparing(k ->(Date)k.get("payDate")));
+        log.error(details.toString());
+        Collections.reverse(details);
+        log.error(details.toString());
     }
+
 
     @Test
     public void test6() {
@@ -217,7 +231,7 @@ public class Task2Test {
         try {
             int i = 1 / 0;
         } catch (Exception e) {
-            return;
+            throw new RuntimeException(e.getMessage());
         } finally {
             System.out.println(12);
         }

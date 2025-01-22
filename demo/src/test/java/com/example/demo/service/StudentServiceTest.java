@@ -64,11 +64,16 @@ public class StudentServiceTest {
         List<String> ids = allStudent.stream().map(Student::getId).collect(Collectors.toList());
         param.setIds(ids);
         log.error("入参:{}", param);
+
+        redisUtils.set("param", param);
+        StudentParamVO value1 = redisUtils.getValue("param");
+        log.error("logInfo:{}", value1);
+
         List<Student> studentList = studentDao.queryStudentByCondition(param);
         log.error(studentList.toString());
-        redisUtils.set("param", "爱小博");
+
+        redisUtils.set("param", "哈哈");
         String value2 = redisUtils.getValue("param");
-//        StudentParamVO value2 = redisUtils.getValue("param");
         log.error("logInfo:{}", value2);
     }
 
