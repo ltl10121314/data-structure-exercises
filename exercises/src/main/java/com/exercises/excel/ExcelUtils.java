@@ -1,5 +1,6 @@
 package com.exercises.excel;
 
+import com.alibaba.fastjson.JSON;
 import com.exercises.date.DateStyle;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -100,8 +101,10 @@ public class ExcelUtils {
             cellName.setCellStyle(headStyle);
             cellName.setCellValue("表头" + i);
             Cell cell_1 = row1.createCell(i);
+            DataFormat dataFormat = workbook.createDataFormat();
+            amountCellStyle.setDataFormat(dataFormat.getFormat("0"));
+            BigDecimal decimal = new BigDecimal("0");
             cell_1.setCellStyle(amountCellStyle);
-            BigDecimal decimal = new BigDecimal("20.8900").setScale(2);
             double a = Double.parseDouble(decimal.toString());
             cell_1.setCellValue(a);
         }
@@ -111,7 +114,8 @@ public class ExcelUtils {
         // 创建合并单元格对象，合并0行0列到0行
 //        CellRangeAddress cellAddresses = new CellRangeAddress(3, 4, 3, 5);
 //        sheet.addMergedRegion(cellAddresses);
-        FileOutputStream fileOutputStream = new FileOutputStream("/Users/liutianlong/Downloads/测试.xls");
+//        FileOutputStream fileOutputStream = new FileOutputStream("/Users/liutianlong/Downloads/测试.xls");
+        FileOutputStream fileOutputStream = new FileOutputStream("D:\\downloads\\测试.xls");
         workbook.write(fileOutputStream);
         workbook.dispose();
         workbook.close();

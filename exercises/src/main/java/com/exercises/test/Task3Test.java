@@ -2,7 +2,9 @@ package com.exercises.test;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -59,5 +61,16 @@ public class Task3Test {
         }
         log.error("dealProduceJoinOnlyDetailTable  sql=====:\n{}",joinTable);
         return joinTable.toString();
+    }
+
+    @Test
+    public void test2(){
+        BigDecimal zero = new BigDecimal("0.0000");
+        BigDecimal zero2 = new BigDecimal("0");
+        int i = zero.compareTo(zero2);
+        log.error(String.valueOf(i));
+        log.error(zero.toString());
+        boolean b = (new BigDecimal("0.0")).compareTo(BigDecimal.ZERO) == 0;
+        System.out.println(b);
     }
 }

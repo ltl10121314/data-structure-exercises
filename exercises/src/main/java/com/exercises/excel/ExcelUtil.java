@@ -52,7 +52,7 @@ public class ExcelUtil {
             font.setFontName("SimSun");
             style.setFont(font);
             CreationHelper createHelper = wb.getCreationHelper();
-            String formats = ExcelUtil.formats("", "元", "#,##0", 3);
+            String formats = ExcelUtil.formats("", "元", "#,##0", 0);
             style.setDataFormat(createHelper.createDataFormat().getFormat(formats));
         }
         return style;
