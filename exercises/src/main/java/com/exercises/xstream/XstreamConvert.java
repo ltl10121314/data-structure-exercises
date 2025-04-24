@@ -1,7 +1,7 @@
 package com.exercises.xstream;
 
+import com.alibaba.fastjson.JSONArray;
 import com.thoughtworks.xstream.XStream;
-import net.sf.json.JSONArray;
 
 import java.util.ArrayList;
 

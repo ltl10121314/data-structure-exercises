@@ -43,6 +43,12 @@ public class Task2Test {
         }
     }
 
+
+    @Test
+    public void test7() {
+
+    }
+
     public static String getNane() {
         return "hello";
     }
@@ -209,6 +215,7 @@ public class Task2Test {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+        log.error("before:{}", date1.before(date2));
         details.add(map1);
         details.add(map2);
         details.sort(Comparator.comparing(k ->(Date)k.get("payDate")));

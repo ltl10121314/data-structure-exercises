@@ -1,4 +1,7 @@
 spring:
+  aop:
+    # 启用自动代理生成
+    auto-proxy: true
   application:
     # 应用名称
     name: demo

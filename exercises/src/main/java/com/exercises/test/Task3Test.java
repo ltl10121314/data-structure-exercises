@@ -12,8 +12,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
-
 @Slf4j
 public class Task3Test {
     //    public static final Pattern NUMBER_WITH_TRAILING_ZEROS_PATTERN = Pattern.compile("\\.0*");
@@ -72,5 +70,9 @@ public class Task3Test {
         log.error(zero.toString());
         boolean b = (new BigDecimal("0.0")).compareTo(BigDecimal.ZERO) == 0;
         System.out.println(b);
+        Boolean bb = null;
+        if(!bb){
+            System.out.println("hehe");
+        }
     }
 }

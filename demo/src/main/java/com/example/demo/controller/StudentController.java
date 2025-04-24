@@ -4,6 +4,7 @@ import com.example.demo.domain.Student;
 import com.example.demo.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,7 @@ public class StudentController {
     @GetMapping("selectOne")
     public Student selectOne(@Param("id") String id) {
         log.info("hello");
+        StudentController studentController = (StudentController) AopContext.currentProxy();
         return this.studentService.queryById(id);
     }
 

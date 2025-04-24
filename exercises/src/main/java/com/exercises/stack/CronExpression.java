@@ -1,16 +1,18 @@
 package com.exercises.stack;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.quartz.TriggerUtils;
 import org.quartz.impl.triggers.CronTriggerImpl;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
+@Slf4j
 public class CronExpression {
     public Object validateCronExpression(JSONObject variable) {
         JSONArray resultList = new JSONArray();
@@ -49,11 +51,11 @@ public class CronExpression {
     }
 
     @Test
-    public void getCronRunTimeTest() {
+    public void getCronRunTimeTest() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
         String str = "{\"pvCode\": \"00/5 14 * * ?\"}";
-        JSONObject json = JSONObject.fromObject(str);
-        System.out.println(json);
-        System.out.println(validateCronExpression(json));
+        Map map = objectMapper.readValue(str, Map.class);
+        log.error(map.toString());
     }
 
 }

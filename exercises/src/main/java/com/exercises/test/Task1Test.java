@@ -16,8 +16,8 @@ import java.util.*;
  * @author liutianlong
  */
 @Slf4j
-public class TaskTest {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TaskTest.class);
+public class Task1Test {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Task1Test.class);
 
     private static NavigableMap<Integer, Integer> rankingMap = Maps.newTreeMap();
     private static Map<String, User> map = new HashMap<>();

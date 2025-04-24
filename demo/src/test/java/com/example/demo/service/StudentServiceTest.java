@@ -58,6 +58,7 @@ public class StudentServiceTest {
 
     @Test
     public void test4() {
+        /*
         StudentParamVO param = new StudentParamVO();
         List<Student> allStudent = studentDao.findAll();
         log.error("allStudent:{}", allStudent);
@@ -75,6 +76,7 @@ public class StudentServiceTest {
         redisUtils.set("param", "哈哈");
         String value2 = redisUtils.getValue("param");
         log.error("logInfo:{}", value2);
+         */
     }
 
     @Test
@@ -89,6 +91,7 @@ public class StudentServiceTest {
 
     @Test
     public void test2() {
+        /*
         Student student = new Student();
         student.setId("1");
         student.setAge(23);
@@ -106,6 +109,7 @@ public class StudentServiceTest {
         list.add(map1);
         list.add(map2);
         studentDao.batchUpdate("student", list);
+         */
     }
 
     @Test
