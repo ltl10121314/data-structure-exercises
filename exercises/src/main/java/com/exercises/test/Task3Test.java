@@ -16,21 +16,40 @@ import java.util.regex.Pattern;
 public class Task3Test {
     //    public static final Pattern NUMBER_WITH_TRAILING_ZEROS_PATTERN = Pattern.compile("\\.0*");
     public static final Pattern NUMBER_WITH_TRAILING_ZEROS_PATTERN = Pattern.compile("^[GCDZTSPKXLY1-9]\\d{1,4}$");
-
+    public static final Pattern pattern = Pattern.compile("waitem.f_[i,v,d,b,n]_\\d+");
     public static void main(String[] args) {
-
         String dateStr = new SimpleDateFormat("yyyy-MM").format(new Date());
         Date date = new Date();
         long time = date.getTime();
         String string = String.valueOf(time);
         System.out.println(string);
-
-        String strVal = "11";
+        String strVal = "waitem.f_n_1+busi[waitem.f_n_2]";
         System.out.println(strVal);
-        Matcher matcher = NUMBER_WITH_TRAILING_ZEROS_PATTERN.matcher(strVal);
-        if (matcher.find()) {
-            System.out.println("\\.0*$");
+        Matcher matcher = pattern.matcher(strVal);
+        while (matcher.find()) {
+            String group = matcher.group();
+            System.out.println(group);
         }
+        String value = null+"";
+        System.out.println(value);
+    }
+
+    @Test
+    public void test2() {
+        BigDecimal zero = new BigDecimal("0.0000");
+        BigDecimal zero2 = new BigDecimal("0");
+        int i = zero.compareTo(zero2);
+        log.error(String.valueOf(i));
+        boolean b = (new BigDecimal("0.0")).compareTo(BigDecimal.ZERO) == 0;
+        System.out.println(b);
+        Integer[] a = new Integer[5];
+        for (Integer i1 : a) {
+            System.out.println(i1);
+        }
+    }
+
+    @Test
+    public void test1() {
         Set<String> tableNames = new HashSet<>();
         tableNames.add("tableName1");
         tableNames.add("tableName");
@@ -57,22 +76,7 @@ public class Task3Test {
                     .append(aliasDetail).append(".").append("ytenant_id = ").append(aliasOther).append(".").append("ytenant_id");
             tableNum++;
         }
-        log.error("dealProduceJoinOnlyDetailTable  sql=====:\n{}",joinTable);
+        log.error("dealProduceJoinOnlyDetailTable  sql=====:\n{}", joinTable);
         return joinTable.toString();
-    }
-
-    @Test
-    public void test2(){
-        BigDecimal zero = new BigDecimal("0.0000");
-        BigDecimal zero2 = new BigDecimal("0");
-        int i = zero.compareTo(zero2);
-        log.error(String.valueOf(i));
-        log.error(zero.toString());
-        boolean b = (new BigDecimal("0.0")).compareTo(BigDecimal.ZERO) == 0;
-        System.out.println(b);
-        Boolean bb = null;
-        if(!bb){
-            System.out.println("hehe");
-        }
     }
 }

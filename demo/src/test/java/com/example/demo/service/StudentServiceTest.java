@@ -48,6 +48,7 @@ public class StudentServiceTest {
 
     @Test
     public void test5(){
+        String action = Thread.currentThread().getStackTrace()[2].getMethodName();
         Map<String, String> map = new HashMap<>();
         List<User> users = new ArrayList<>();
         Map<String, String> authName = users.stream().collect(Collectors.toMap(User::getId, User::getName, (v1, v2) -> v1));

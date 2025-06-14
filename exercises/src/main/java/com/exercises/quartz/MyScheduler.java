@@ -1,10 +1,12 @@
 package com.exercises.quartz;
 
+import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class MyScheduler {
     public static void main(String[] args) throws SchedulerException, InterruptedException {
         // 1、创建调度器Scheduler
@@ -22,13 +24,13 @@ public class MyScheduler {
 
         //4、执行
         scheduler.scheduleJob(jobDetail, trigger);
-        System.out.println("--------scheduler start ! ------------");
+        log.error("--------scheduler start ! ------------");
         scheduler.start();
 
         //睡眠
         TimeUnit.MINUTES.sleep(1);
         scheduler.shutdown();
-        System.out.println("--------scheduler shutdown ! ------------");
+        log.error("--------scheduler shutdown ! ------------");
 
 
     }
