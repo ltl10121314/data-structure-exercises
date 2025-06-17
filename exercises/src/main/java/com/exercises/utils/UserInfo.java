@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @author yinaibang
+ * @author liutlong
  */
 public class UserInfo implements java.io.Serializable {
 

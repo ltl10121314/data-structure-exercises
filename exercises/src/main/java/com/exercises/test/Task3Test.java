@@ -4,10 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,30 +22,33 @@ public class Task3Test {
         Date date = new Date();
         long time = date.getTime();
         String string = String.valueOf(time);
-        System.out.println(string);
+        log.error(string);
         String strVal = "waitem.f_n_1+busi[waitem.f_n_2]";
-        System.out.println(strVal);
+        log.error(strVal);
         Matcher matcher = pattern.matcher(strVal);
+        Set<String> set = new HashSet<>();
         while (matcher.find()) {
             String group = matcher.group();
-            System.out.println(group);
+            set.add(group);
         }
-        String value = null+"";
-        System.out.println(value);
+        log.error(set.toString());
     }
 
     @Test
     public void test2() {
-        BigDecimal zero = new BigDecimal("0.0000");
-        BigDecimal zero2 = new BigDecimal("0");
-        int i = zero.compareTo(zero2);
-        log.error(String.valueOf(i));
-        boolean b = (new BigDecimal("0.0")).compareTo(BigDecimal.ZERO) == 0;
-        System.out.println(b);
-        Integer[] a = new Integer[5];
-        for (Integer i1 : a) {
-            System.out.println(i1);
-        }
+        LinkedList<String> linkedList = new LinkedList<>();
+        linkedList.addFirst("1");
+        linkedList.addFirst("2");
+        linkedList.addFirst("3");
+        log.error(linkedList.toString());
+        String pop = linkedList.pop();
+        log.error(pop);
+        linkedList.push("4");
+        log.error(linkedList.toString());
+        String peek = linkedList.peek();
+        log.error(peek);
+        log.error(linkedList.toString());
+
     }
 
     @Test
@@ -57,7 +60,7 @@ public class Task3Test {
         tableNames.add("tableName3");
         String tableName = "tableName";
         tableNames.remove(tableName);
-        System.out.println(tableNames);
+        log.error(tableNames.toString());
         dealProduceJoinTableByTableNames(tableNames, "tableName", "wpd");
     }
 
