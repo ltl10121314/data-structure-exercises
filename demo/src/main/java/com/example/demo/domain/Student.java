@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @author Liu Tianlong
  * @program data-structure-exercises
@@ -27,4 +29,8 @@ public class Student  {
      * 年龄
      */
     private Integer age;
+
+    private Date beginDate;
+
+    private Date endDate;
 }

@@ -15,6 +15,7 @@
     <modules>
         <module>exercises</module>
         <module>demo</module>
+        <module>demo-data</module>
     </modules>
     <dependencyManagement>
         <dependencies>

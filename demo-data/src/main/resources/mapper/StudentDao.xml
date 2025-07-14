@@ -8,7 +8,9 @@
     <select id="queryById" resultType="com.example.demo.domain.Student">
         select id,
         name,
-        age
+        age,
+        beginDate,
+        endDate
         from student
         where id = #{id}
     </select>

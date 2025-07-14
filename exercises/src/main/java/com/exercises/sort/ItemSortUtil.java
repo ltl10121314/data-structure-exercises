@@ -137,6 +137,8 @@ public class ItemSortUtil<T> {
             items.get(i).setSeq(i + 1);
         }
         log.error(items.toString());
+        List<String> list = Collections.synchronizedList(new LinkedList<String>());
+
     }
 
     private static Map<Item, List<Item>> buildAdjList() {

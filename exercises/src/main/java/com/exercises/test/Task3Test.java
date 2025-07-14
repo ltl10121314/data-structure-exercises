@@ -5,10 +5,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +14,7 @@ public class Task3Test {
     //    public static final Pattern NUMBER_WITH_TRAILING_ZEROS_PATTERN = Pattern.compile("\\.0*");
     public static final Pattern NUMBER_WITH_TRAILING_ZEROS_PATTERN = Pattern.compile("^[GCDZTSPKXLY1-9]\\d{1,4}$");
     public static final Pattern pattern = Pattern.compile("waitem.f_[i,v,d,b,n]_\\d+");
+
     public static void main(String[] args) {
         String dateStr = new SimpleDateFormat("yyyy-MM").format(new Date());
         Date date = new Date();
@@ -26,6 +24,7 @@ public class Task3Test {
         String strVal = "waitem.f_n_1+busi[waitem.f_n_2]";
         log.error(strVal);
         Matcher matcher = pattern.matcher(strVal);
+
         Set<String> set = new HashSet<>();
         while (matcher.find()) {
             String group = matcher.group();
@@ -35,20 +34,48 @@ public class Task3Test {
     }
 
     @Test
+    public void test4() {
+        int[] numbers = {1, 2, 3, 4, 5};
+        int index = 10; // 假设这是不断增加的索引
+        int arrayIndex = index % numbers.length; // 使用模运算得到循环索引
+        System.out.println(numbers[arrayIndex]); // 输出: 5
+    }
+
+    @Test
+    public void test3() {
+        long timestamp = System.currentTimeMillis() / 1000;
+        long dataCenterId = 1;
+        long workerId = 1;
+        long reserved = 1;
+        long sequence = 1;
+        long id = timestamp - 1483200000L << 33 | dataCenterId << 25 | workerId << 19 | reserved << 18 | sequence;
+        System.out.println(id);
+        System.out.println((Long.MAX_VALUE >> 33) + 1483200000L);
+        System.out.println((Long.MAX_VALUE - 1483200000L >> 33) / 3600 / 24 / 365);
+        System.out.println(Long.MAX_VALUE);
+    }
+
+    @Test
     public void test2() {
-        LinkedList<String> linkedList = new LinkedList<>();
+        Deque<String> linkedList = new LinkedList<>();
         linkedList.addFirst("1");
-        linkedList.addFirst("2");
-        linkedList.addFirst("3");
+        linkedList.push("2");
+        linkedList.addLast("3");
         log.error(linkedList.toString());
-        String pop = linkedList.pop();
-        log.error(pop);
+        log.error(linkedList.peek());
+        log.error(linkedList.toString());
+        log.error(linkedList.pop());
         linkedList.push("4");
         log.error(linkedList.toString());
-        String peek = linkedList.peek();
-        log.error(peek);
+        log.error(linkedList.peek());
         log.error(linkedList.toString());
-
+        linkedList.offer("5");
+        log.error(linkedList.toString());
+        log.error(linkedList.poll());
+        log.error(linkedList.toString());
+        String[] ss = {};
+        int length = ss.length;
+        System.out.println(length);
     }
 
     @Test

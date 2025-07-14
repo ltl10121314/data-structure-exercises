@@ -80,7 +80,7 @@ public class LogAspect {
     public void returnValuePointcut(JoinPoint joinPoint, final Object returnValue) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        log.error(method.getName());
-        log.error(returnValue.toString());
+//        log.error(method.getName());
+//        log.error(returnValue.toString());
     }
 }
