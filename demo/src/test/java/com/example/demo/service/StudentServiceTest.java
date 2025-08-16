@@ -167,7 +167,6 @@ public class StudentServiceTest {
     }
 
     @Test
-    @MyLog
     public void task(){
         log.error("------------");
     }

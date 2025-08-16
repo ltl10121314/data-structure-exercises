@@ -1,5 +1,6 @@
 package com.exercises.test;
 
+import com.exercises.domain.Item;
 import com.exercises.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -8,10 +9,18 @@ import org.junit.Test;
 import org.springframework.lang.NonNull;
 import org.springframework.util.DigestUtils;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,7 +55,29 @@ public class Task2Test {
 
     @Test
     public void test7() {
-
+        Function<User, String> keyFunc = User::getName;
+        BiConsumer<Item, User> consumer = (item, user) -> {
+            item.setCode(user.getId());
+            item.setName(user.getName());
+        };
+        User user1 = new User();
+        user1.setId("1");
+        user1.setCode("a");
+        user1.setName("爱");
+        Item item1 = new Item();
+        log.error(user1.toString());
+        log.error(item1.toString());
+        consumer.accept(item1, user1);
+        log.error(user1.toString());
+        log.error(item1.toString());
+        log.error(keyFunc.apply(user1));
+        BiFunction<Item, User, String> biFunction = (item2, user) -> {
+            String code = item2.getCode();
+            String name = user.getName();
+            return code + "_" + name;
+        };
+        String result = biFunction.apply(item1, user1);
+        log.error(result);
     }
 
     public static String getNane() {
@@ -218,7 +249,7 @@ public class Task2Test {
         log.error("before:{}", date1.before(date2));
         details.add(map1);
         details.add(map2);
-        details.sort(Comparator.comparing(k ->(Date)k.get("payDate")));
+        details.sort(Comparator.comparing(k -> (Date) k.get("payDate")));
         log.error(details.toString());
         Collections.reverse(details);
         log.error(details.toString());

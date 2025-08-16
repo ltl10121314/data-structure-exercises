@@ -2,14 +2,16 @@ package com.example.demo.controller;
 
 import com.example.demo.domain.Student;
 import com.example.demo.service.StudentService;
+import com.example.demo.service.UserService;
+import com.example.demo.utils.SpringContextUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.executor.resultset.ResultSetWrapper;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Liu Tianlong
@@ -36,8 +38,8 @@ public class StudentController {
     @GetMapping("selectOne")
     public Student selectOne(@Param("id") String id) {
         log.info("hello");
-//        StudentController studentController = (StudentController) AopContext.currentProxy();
-        return this.studentService.queryById(id);
+        SpringContextUtil.getBean(UserService.class).findAll();
+        return SpringContextUtil.getBean(StudentService.class).queryById(id);
     }
 
     @GetMapping("hello")
@@ -48,5 +50,15 @@ public class StudentController {
     @GetMapping("task")
     public void task() {
         studentService.task();
+    }
+
+    @PostMapping(value = {"/open-api/bankOffer/insertTemplateForIReport", "/internal/open-api/bankOffer/insertTemplateForIReport"})
+    public void insertTemplateForIReport(HttpServletResponse response, @RequestBody Map<String, Object> param) {
+        Object waBankOfferTemplate = param.get("wa_bank_offer_template");
+        if (waBankOfferTemplate instanceof List) {
+            List<Map<String, Object>> mapList = (List<Map<String, Object>>) waBankOfferTemplate;
+            System.out.println("----------------");
+        }
+        System.out.println("0000000000000");
     }
 }
