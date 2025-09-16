@@ -1,4 +1,7 @@
-package com.exercises.thread;
+package com.exercises.thread.abc;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.locks.LockSupport;
 
@@ -6,6 +9,7 @@ import java.util.concurrent.locks.LockSupport;
  * @author liutianlong
  */
 public class PrintAbc {
+    private static final Logger LOGGER = LoggerFactory.getLogger(PrintAbc.class);
     static Thread threadA, threadB, threadC;
 
     public static void main(String[] args) {

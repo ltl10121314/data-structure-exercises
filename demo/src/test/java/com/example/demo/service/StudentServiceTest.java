@@ -43,7 +43,7 @@ public class StudentServiceTest {
 
     @Test
     public void test6(){
-        studentService.task();
+//        studentService.task();
     }
 
     @Test

@@ -1,4 +1,4 @@
-package com.exercises.thread;
+package com.exercises.thread.abc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +28,7 @@ public class AbcLock {
                 lock.lock();
                 try {
                     while (state % 3 == 0) {
-                        System.out.print("A");
+                        LOGGER.error("A");
                         state++;
                         i++;
                     }
@@ -47,7 +47,7 @@ public class AbcLock {
                 lock.lock();
                 try {
                     while (state % 3 == 1) {
-                        System.out.print("B");
+                        LOGGER.error("B");
                         state++;
                         i++;
                     }
@@ -66,7 +66,7 @@ public class AbcLock {
                 lock.lock();
                 try {
                     while (state % 3 == 2) {
-                        System.out.print("C");
+                        LOGGER.error("C");
                         state++;
                         i++;
                     }

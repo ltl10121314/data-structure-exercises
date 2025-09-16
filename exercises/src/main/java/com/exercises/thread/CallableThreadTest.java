@@ -1,6 +1,8 @@
 package com.exercises.thread;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -14,6 +16,7 @@ import java.util.concurrent.FutureTask;
  * @author liutianlong
  */
 public class CallableThreadTest implements Callable<Integer> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CallableThreadTest.class);
 
     public static void main(String[] args) {
         CallableThreadTest ctt = new CallableThreadTest();
@@ -27,10 +30,8 @@ public class CallableThreadTest implements Callable<Integer> {
 
         try {
             System.out.println("子线程的返回值：" + ft.get());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
+        } catch (InterruptedException | ExecutionException e) {
+            LOGGER.error("", e);
         }
 
     }
@@ -39,7 +40,7 @@ public class CallableThreadTest implements Callable<Integer> {
     public Integer call() throws Exception {
         int i = 0;
         for (; i < 100; i++) {
-            System.out.println(Thread.currentThread().getName() + " " + i);
+            LOGGER.error("{} {}", Thread.currentThread().getName(), i);
         }
         return i;
     }
@@ -56,9 +57,7 @@ public class CallableThreadTest implements Callable<Integer> {
                     String input = in.nextLine();
                     System.out.println(input);
                 } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-//                    IOUtils.closeQuietly(in);
+                    LOGGER.error("", e);
                 }
             }
             // 线程的名字
@@ -88,12 +87,14 @@ public class CallableThreadTest implements Callable<Integer> {
                         // TODO
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.error("", e);
                 } finally {
                     try {
-                        serverSocket.close();
+                        if (serverSocket != null) {
+                            serverSocket.close();
+                        }
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        LOGGER.error("", e);
                     }
                 }
             }

@@ -12,7 +12,7 @@ public class CreateThreadTest1 extends Thread {
 
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
-            LOGGER.info(Thread.currentThread().getName() + "  : " + i);
+            LOGGER.error("{}  : {}", Thread.currentThread().getName(), i);
             if (i == 20) {
                 new CreateThreadTest1().start();
                 new CreateThreadTest1().start();
@@ -23,7 +23,7 @@ public class CreateThreadTest1 extends Thread {
     @Override
     public void run() {
         for (; i < 100; i++) {
-            System.out.println(getName() + " " + i);
+            LOGGER.error("{} {}", Thread.currentThread().getName(), i);
         }
     }
 }

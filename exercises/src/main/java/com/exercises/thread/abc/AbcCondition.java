@@ -1,4 +1,7 @@
-package com.exercises.thread;
+package com.exercises.thread.abc;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -8,6 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author liutianlong
  */
 public class AbcCondition {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbcCondition.class);
     private static final Lock lock = new ReentrantLock();
     private static final Condition A = lock.newCondition();
     private static final Condition B = lock.newCondition();
@@ -19,6 +23,7 @@ public class AbcCondition {
         new ThreadB().start();
         new ThreadC().start();
     }
+
     static class ThreadA extends Thread {
         @Override
         public void run() {
@@ -28,12 +33,12 @@ public class AbcCondition {
                     while (count % 3 != 0) {//注意这里是不等于0，也就是说在count % 3为0之前，当前线程一直阻塞状态
                         A.await(); // A释放lock锁
                     }
-                    System.out.print("A");
+                    LOGGER.error("A");
                     count++;
                     B.signal(); // A执行完唤醒B线程
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOGGER.error("ThreadA error:", e);
             } finally {
                 lock.unlock();
             }
@@ -49,12 +54,12 @@ public class AbcCondition {
                     while (count % 3 != 1) {//注意这里是不等于0，也就是说在count % 3为0之前，当前线程一直阻塞状态
                         B.await(); // A释放lock锁
                     }
-                    System.out.print("B");
+                    LOGGER.error("B");
                     count++;
                     C.signal(); // A执行完唤醒B线程
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOGGER.error("ThreadB error:", e);
             } finally {
                 lock.unlock();
             }
@@ -75,7 +80,7 @@ public class AbcCondition {
                     A.signal();
                 }
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOGGER.error("ThreadC error:", e);
             } finally {
                 lock.unlock();
             }

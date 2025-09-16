@@ -1,4 +1,4 @@
-package com.exercises.thread;
+package com.exercises.thread.abc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
