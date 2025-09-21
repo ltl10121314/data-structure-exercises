@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -45,9 +46,13 @@ public class ReflectionTest {
     }
 
     @Test
-    public void test1() throws ClassNotFoundException {
-        Class<String> stringClass = String.class;
-        Class string = Class.forName("java.lang.string");
+    public void test1() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        Class<?> aClass = Class.forName("com.exercises.test.BillData");
+        Field[] fields = aClass.getFields();
+        for (Field field : fields) {
+            LOGGER.error(field.toString());
+        }
+        LOGGER.error(aClass.toString());
     }
 }
 

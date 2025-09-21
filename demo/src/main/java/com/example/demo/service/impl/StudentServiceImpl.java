@@ -6,6 +6,7 @@ import com.example.demo.mapper.StudentDao;
 import com.example.demo.model.StudentParamVO;
 import com.example.demo.service.StudentService;
 import com.example.demo.service.UserService;
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -20,7 +21,7 @@ import java.util.List;
  * @description 学生逻辑实现层
  */
 @Service
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl implements StudentService, BeanNameAware {
 
     @Autowired
     private StudentDao studentDao;
@@ -154,7 +155,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    private void task3() {
+    public void task3() {
         Student student = new Student();
         student.setId("3");
         student.setAge(3);
@@ -168,5 +169,10 @@ public class StudentServiceImpl implements StudentService {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    @Override
+    public void setBeanName(String name) {
+        System.out.println("beanName:" + name);
     }
 }
