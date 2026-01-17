@@ -119,6 +119,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <!--文档说明集成-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.13</version> <!-- 确保使用与Spring Boot 2.7.12兼容的版本 -->
+        </dependency>
     </dependencies>
 
     <build>

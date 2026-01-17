@@ -4,6 +4,7 @@ import com.example.demo.domain.Student;
 import com.example.demo.service.StudentService;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.SpringContextUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("student")
+@Tag(name = "学生控制类", description = "调用学生相关接口")
 @Slf4j
 public class StudentController {
     /**
